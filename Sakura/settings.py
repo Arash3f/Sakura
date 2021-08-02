@@ -34,6 +34,8 @@ INSTALLED_APPS = [
 
     ####### Additional Apps ####### 
     'django_cleanup.apps.CleanupConfig', # clear (Automatically clear image file after delete) :
+    'ckeditor',
+    
     # document 
     'drf_yasg',
 ]

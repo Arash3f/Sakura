@@ -14,10 +14,16 @@ class product_serializer_helper_picture(serializers.ModelSerializer):
         fields =('picture',)
         
 class product_list_serializer(serializers.ModelSerializer):
-    picture = product_serializer_helper_picture(many=True )
+    picture = serializers.SerializerMethodField()
+    
     class Meta:
         model = product
         fields = ('slug','name','show_cost','available','picture')
+
+    def get_picture(self, obj):
+        query = ProductGallery.objects.filter(product=obj , active=True)[:2] 
+        serializer = product_serializer_helper_picture(query, many=True)
+        return serializer.data
 
 # ************************************************************************
 

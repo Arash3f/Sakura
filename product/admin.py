@@ -30,6 +30,7 @@ class Product_Cost(admin.ModelAdmin):
 class product_group(admin.ModelAdmin):
     field = "__all__"
     list_display=['name' , 'group']
+    prepopulated_fields = {'slug': ('name',), }
     list_filter = ("group",)
 
 @admin.register(models.comment)

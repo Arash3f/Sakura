@@ -11,6 +11,7 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404
 # for decode url slug :
 from urllib.parse import unquote
+from random import randint
 
 # Pagination :
 # override PageNumberPagination for product list :
@@ -38,13 +39,18 @@ class top_product(generics.GenericAPIView , mixins.ListModelMixin):
 # best product (sort by group [0])
 class best_product(generics.GenericAPIView , mixins.ListModelMixin):
     serializer_class = product_list_serializer
-    group = models.product_group.objects.filter(group__isnull=True)
-    if group.count() >= 1 :
-        queryset = models.product.objects.filter(group__group=group[0])[0:9]
-    # not have any group yet .
-    else:
-        queryset = models.product.objects.all().order_by('-sell')[0:9]
+    
+    def get_queryset(self):
+        group = models.product_group.objects.filter(group__isnull=True)
+        if group.count() >= 1 :
+            i = randint(0, group.count()-1)
+            queryset = models.product.objects.filter(group__group=group[i])[0:9]
+        # not have any group yet .
+        else:
+            queryset = models.product.objects.all().order_by('-sell')[0:9]
 
+        return queryset
+    
     def get(self, request, *args, **kwargs):
         return self.list(request, *args, **kwargs)
 

@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.validators import MaxValueValidator , MinValueValidator
+from ckeditor.fields import RichTextField
 
 class product(models.Model):
     name        = models.CharField("نام کالا" ,max_length = 100 )
     slug        = models.SlugField(unique=True, allow_unicode=True, max_length=255)
-    description = models.TextField(verbose_name="توضیحات" , blank=True , null = True)
+    description = RichTextField(blank=True , null = True)
     inventory   = models.PositiveIntegerField(verbose_name='موجودی',validators=[MinValueValidator(1)] )
     available   = models.BooleanField(verbose_name="(موجودی)وضعیت" , default=True )
     sell        = models.IntegerField(verbose_name='تعداد فروش'  , default= 0 )
@@ -24,6 +25,7 @@ class product(models.Model):
 class ProductGallery(models.Model):
     picture = models.ImageField("عکس" ,upload_to = 'product/', blank=True , null = True)
     product = models.ForeignKey('Product', related_name="picture", on_delete=models.CASCADE)
+    active = models.BooleanField(default=False, blank=True , null = True)
 
     class Meta:
         verbose_name = ("عکس ")
