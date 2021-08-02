@@ -1,20 +1,18 @@
 from pathlib import Path
 from datetime import timedelta
+from decouple import config , Csv
 import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-lq_a%&s8!%331roxsg8w)y+xxnkjub-g263)hd(rxpp_i-eq-3'
-# SECRET_KEY = os.environ.get("SECRET_KEY" , "foo")
+SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = False
-# DEBUG = int(os.environ.get("DEBUG", default=1))
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ["api.sdriedfi.ir","www.api.sdriedfi.ir" , "127.0.0.1"]
-# ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',# whitenoise
+    # 'whitenoise.runserver_nostatic',# whitenoise
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,7 +38,7 @@ MIDDLEWARE = [
     'django.middleware.common.BrokenLinkEmailsMiddleware',
 
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', # whitenoise
+    # 'whitenoise.middleware.WhiteNoiseMiddleware', # whitenoise
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -76,20 +74,14 @@ WSGI_APPLICATION = 'Sakura.wsgi.application'
 # Database
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': config('ENGINE',default="django.db.backends.sqlite3"),
+        'NAME': config('NAME',default=BASE_DIR / 'db.sqlite3'),
+        'USER': config('USER',default=""),
+        'PASSWORD':config('PASSWORD',default=""),
+        'HOST': config('HOST',default=""),
+        'PORT': config('PORT',default="")
     }
 }
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'sdriedfi_ddatabbase',
-#         'USER': 'sdriedfi_sakura',
-#         'PASSWORD':'SQW761new',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#     }
-# }
 
 # DRF Config
 REST_FRAMEWORK = {
@@ -164,15 +156,12 @@ SIMPLE_JWT = {
 }
 
 # Email config
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-# EMAIL_USE_TLS = True
-# EMAIL_HOST = 'mail.sdriedf.ir'
-# EMAIL_HOST_USER = 'sakura@sdriedf.ir'
-# EMAIL_HOST_PASSWORD = 'BBQ_90_SS'
-# EMAIL_PORT = 587
-
-# for show email in consol :
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = config('EMAIL_BACKEND' , default='django.core.mail.backends.console.EmailBackend')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS' , cast=bool , default=True)
+EMAIL_HOST = config('EMAIL_HOST', default="EMAIL_HOST")
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default="EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default="EMAIL_HOST_PASSWORD")
+EMAIL_PORT = config('EMAIL_PORT' , cast=int, default=587)
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -180,12 +169,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_URL = '/static/'
 MEDIA_URL = "/media/"
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR , 'static')
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR , 'static')
+]
 
 STATIC_ROOT = os.path.join(BASE_DIR , "staticfiles")
 MEDIA_ROOT   = os.path.join(BASE_DIR , "media")
 
 # origin site url :
-SITE_URL="sdriedf.ir"
+SITE_URL=config('SITE_URL')
