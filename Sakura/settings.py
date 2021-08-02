@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'product',
     'shopping',
     'panel',
+    'site_model',
 
     ####### Additional Apps ####### 
     'django_cleanup.apps.CleanupConfig', # clear (Automatically clear image file after delete) :
