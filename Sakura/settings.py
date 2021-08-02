@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
 
+    'accounts',
+
     ####### Additional Apps ####### 
     'django_cleanup.apps.CleanupConfig', # clear (Automatically clear image file after delete) :
     # document 
