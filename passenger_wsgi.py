@@ -1,0 +1,1 @@
+from Sakura.wsgi import application
