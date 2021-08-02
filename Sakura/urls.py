@@ -5,13 +5,13 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-   #  path('accounts/' , include('accounts.urls')),
-    # path('site_model/' , include('site_model.urls')),
-   #  path('product/' , include('product.urls')),
-    # path('auth_api/', include('rest_framework.urls')),
-    # path('shop/', include('shop.urls')),
+    path('accounts/' , include('accounts.urls')),
+    path('site_model/' , include('site_model.urls')),
+    path('product/' , include('product.urls')),
+    path('auth_api/', include('rest_framework.urls')),
+    path('shop/', include('shopping.urls')),
+    path('panel/', include('panel.urls')),
     # path('zarinpal/', include('zarinpal.urls')),
-    # path('panel/', include('panel.urls')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL , document_root=settings.MEDIA_ROOT)

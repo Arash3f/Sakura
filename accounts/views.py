@@ -1,6 +1,6 @@
 import os
 import jwt
-from onshop import settings
+from Sakura import settings
 from coreapi.compat import force_text
 from datetime import datetime
 
@@ -36,7 +36,7 @@ from rest_framework.decorators import (
                                         )
 
 # model : 
-from shop.models import Order, OrderRow
+from shopping.models import Order, OrderRow
 from accounts.models import (
                             image_section ,
                             users,
