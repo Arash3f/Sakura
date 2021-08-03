@@ -13,22 +13,22 @@ from django.urls import reverse
 
 class User_Informations_Helper_Serialiaer(serializers.ModelSerializer): 
 
-    username = serializers.CharField()
+    username = serializers.CharField(read_only=True)
     email=serializers.EmailField()
 
     class Meta:
         model = User
         fields = ("username", "first_name", "last_name" , "email")
 
-class User_Informations_Serialiaer(serializers.ModelSerializer):
+class User_Informations_Serialiaer(serializers.Serializer):
 
     user = User_Informations_Helper_Serialiaer(many=False)
     money = serializers.IntegerField(read_only=True)
     phone = serializers.CharField(read_only=True)
-
-    class Meta:
-        model = users
-        fields = ("user", "phone", "money")
+    status = serializers.BooleanField(default=False , read_only=True)
+    # class Meta:
+    #     model = users
+    #     fields = ("user", "phone", "money" )
     
     
     def update(self, instance, validated_data):
@@ -42,13 +42,11 @@ class User_Informations_Serialiaer(serializers.ModelSerializer):
         new_first_name = validated_data['user']['first_name']
         new_last_name = validated_data['user']['last_name']
         new_email = validated_data['user']['email']
-        new_username = validated_data['user']['username']
 
         user = request.user
         user.first_name=new_first_name
         user.last_name=new_last_name
         user.email=new_email
-        user.username=new_username
         
         if new_email != instance.user.email :
             # for email :
@@ -58,6 +56,7 @@ class User_Informations_Serialiaer(serializers.ModelSerializer):
             confirm_email = True
 
             user.is_active = False
+            instance.status = True
             logout(request)
 
         user.save()
@@ -65,10 +64,9 @@ class User_Informations_Serialiaer(serializers.ModelSerializer):
         instance.user.first_name =new_first_name
         instance.user.last_name = new_last_name
         instance.user.email = new_email
-        instance.user.username = new_username
 
         data={
-            "username" : new_username,
+            "username" : user.username,
             "confirm_email":confirm_email,
             "absurl":absurl
         }

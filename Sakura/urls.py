@@ -11,6 +11,7 @@ urlpatterns = [
     path('auth_api/', include('rest_framework.urls')),
     path('shop/', include('shopping.urls')),
     path('panel/', include('panel.urls')),
+    path('support/', include('support.urls')),
     # path('zarinpal/', include('zarinpal.urls')),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

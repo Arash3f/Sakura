@@ -6,7 +6,7 @@ urlpatterns = [
     # product :
     path('api/v1/product_list/', views.product_list.as_view() , name="product_list"),
     path('api/v1/top_product/' , views.top_product.as_view()  , name="top_product"),
-    path('api/v1/best_product/', views.best_product.as_view() , name="best_product"),
+    path('api/v1/last_product/', views.last_product.as_view() , name="last_product"),
     
     re_path(r'api/v1/product/(?P<slug>([^/]+))/comments/', views.comments.as_view() , name="comments"),
     re_path(r'api/v1/product/(?P<slug>([^/]+))/', views.product_page.as_view()),
