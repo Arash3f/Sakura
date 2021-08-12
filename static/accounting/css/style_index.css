@@ -1,0 +1,116 @@
+body {
+    background-color: #c0c0c0;
+    display: grid;
+    min-height: 100vh;
+    min-width: 100vh;
+    grid-template-columns: 80% 20%;
+    grid-template-rows: 50px auto;
+    grid-template-areas: "nv nv" "in sb" "in sb" "in sb" "in sb";
+    margin: 0;
+}
+
+.header {
+    grid-area: nv;
+    display: flex;
+    flex-direction: row;
+    background-color: #ffffffce;
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.header h1 {
+    margin: auto 50px;
+    padding: 5px;
+    font-size: 1.5rem;
+    color: rgb(160, 60, 60);
+    border: 1px solid rgb(6, 136, 14);
+}
+
+.header button {
+    width: 100px;
+    margin: auto 50px;
+    height: 40px;
+    background-color: red;
+    border-radius: 10px;
+    margin-left: auto;
+}
+
+.header button a {
+    text-decoration-line: none;
+    color: rgb(255, 255, 255);
+}
+
+.index {
+    grid-area: in;
+    width: 100%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffffb7;
+}
+
+.slidebar {
+    grid-area: sb;
+    background-color: #eea40544;
+}
+.slidebar .groups summary{
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    border-bottom: 1px solid rgb(0, 0, 0);
+
+}
+.slidebar .groups .sub-groups{
+    height: 50px;
+    display: block;
+    border-bottom: 1px solid rgb(0, 0, 0);
+
+}
+.slidebar .groups a{
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7rem;
+    margin-top: 0;
+    text-decoration-line: none;
+
+}
+.index .styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 80%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin: 50px auto;
+    text-align: right;
+    direction: rtl;
+}
+
+.index .styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+}
+
+.index .styled-table th,
+.index .styled-table td {
+    padding: 12px 15px;
+}
+
+.index .styled-table td img {
+    width: 50px;
+    height: 50px;
+}
+
+.index .styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.index .styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}

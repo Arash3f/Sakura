@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'panel',
     'site_model',
     'support',
+    'admin_panel',
 
     ####### Additional Apps ####### 
     'django_cleanup.apps.CleanupConfig', # clear (Automatically clear image file after delete) :
@@ -84,7 +85,7 @@ WSGI_APPLICATION = 'Sakura.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': config('ENGINE',default="django.db.backends.sqlite3"),
-        'NAME': config('NAME',default=BASE_DIR / 'db.sqlite3'),
+        'NAME': config('NAME',default=BASE_DIR / 'db-branch-admin-panel.sqlite3'),
         'USER': config('USER',default=""),
         'PASSWORD':config('PASSWORD',default=""),
         'HOST': config('HOST',default=""),
