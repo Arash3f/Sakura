@@ -20,4 +20,8 @@ class Contact_Us(admin.ModelAdmin):
 @admin.register(models.FAQ_model)
 class FAQ_model(admin.ModelAdmin):
     field = "__all__"
+
+@admin.register(models.Site_Information_Gallery)
+class Site_Information_Gallery(admin.ModelAdmin):
+    field = "__all__"
     

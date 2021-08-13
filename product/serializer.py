@@ -48,7 +48,7 @@ class product_group_serializer(serializers.ModelSerializer):
 
     class Meta:
         model = product_group
-        fields = ('id','name' ,'group'  , 'picture')
+        fields = ('id','name' ,'group'  , 'picture' , 'slug')
 
 
 class product_search_group_serializer(serializers.ModelSerializer):

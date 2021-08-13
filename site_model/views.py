@@ -2,11 +2,13 @@ from site_model.serializer import(site_model_serializer ,
                                     about_we_serializer ,
                                     contact_us_serializer,
                                     FAQ_serializer,
+                                    site_information_gallery_serializer,
                                     )
 from site_model.models import (Private_Site_Information ,
                                 About_Us ,
                                 Contact_Us , 
                                 FAQ_model,
+                                Site_Information_Gallery,
                                 )
 from rest_framework import (generics,
                             mixins,
@@ -29,6 +31,13 @@ class site_information(generics.GenericAPIView , mixins.ListModelMixin):
     #     else:
     #         return self.create(request, *args, **kwargs)
 
+class slider_gallery(generics.GenericAPIView , mixins.ListModelMixin):
+    serializer_class = site_information_gallery_serializer
+    queryset = Site_Information_Gallery.objects.all()
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+        
 class About_Us(generics.GenericAPIView , mixins.ListModelMixin , mixins.CreateModelMixin):
     serializer_class = about_we_serializer
     queryset = About_Us.objects.all()

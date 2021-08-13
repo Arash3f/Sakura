@@ -2,6 +2,7 @@ from site_model.models import (Private_Site_Information ,
                                 About_Us ,
                                 Contact_Us,
                                 FAQ_model,
+                                Site_Information_Gallery,
                                 )
 from rest_framework import serializers
 
@@ -43,4 +44,9 @@ class FAQ_serializer(serializers.ModelSerializer):
 
     class Meta :
         model = FAQ_model 
+        fields= '__all__'
+
+class site_information_gallery_serializer(serializers.ModelSerializer):
+    class Meta :
+        model = Site_Information_Gallery 
         fields= '__all__'

@@ -13,10 +13,6 @@ class Private_Site_Information(models.Model):
     instagram_id  = models.CharField(verbose_name="آدرس اینستاگرام سایت" ,max_length = 100 , blank=True , null = True)
     whatsapp_id   = models.CharField(verbose_name="آدرس واتس آپ سایت" ,max_length = 100 , blank=True , null = True)
 
-    # header img :
-    main_img_1    = models.ImageField(verbose_name="عکس" ,upload_to = 'main_site/', blank=True , null = True)
-    main_img_2    = models.ImageField(verbose_name="عکس" ,upload_to = 'main_site/', blank=True , null = True)
-
     # part one (img) :
     product_img_1 = models.ImageField(verbose_name="عکس" ,upload_to = 'main_site/', blank=True , null = True)
     product_img_2 = models.ImageField(verbose_name="عکس" ,upload_to = 'main_site/', blank=True , null = True)
@@ -34,6 +30,13 @@ class Private_Site_Information(models.Model):
 
     def __str__(self):
         return self.name
+
+class Site_Information_Gallery(models.Model):
+    picture = models.ImageField("عکس" ,upload_to = 'main_site/gallery/', blank=True , null = True)
+
+    class Meta:
+        verbose_name = ("عکس ")
+        verbose_name_plural = ("عکس ها")
 
 class About_Us(models.Model):
     title = models.CharField(verbose_name="سر تیتر" ,max_length = 100 , blank=True , null = True )
