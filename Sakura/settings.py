@@ -32,7 +32,9 @@ INSTALLED_APPS = [
     'panel',
     'site_model',
     'support',
-    'admin_panel',
+        # panel :
+        'admin_panel',
+        'admin_panel_accounts',
 
     ####### Additional Apps ####### 
     'django_cleanup.apps.CleanupConfig', # clear (Automatically clear image file after delete) :

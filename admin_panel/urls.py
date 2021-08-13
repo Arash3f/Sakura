@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path , include
 from admin_panel import views
 
 urlpatterns = [
@@ -8,6 +8,7 @@ urlpatterns = [
 	path('', views.panel , name="panel"),
 
 	# include :
+	path('accounts/', include('admin_panel_accounts.urls')),
 
 
 ]

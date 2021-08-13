@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/accounting/css/style_index.css' %}" />
+    <title>index</title>
+</head>
+
+<body>
+
+    <!-- header -->
+    <div class="header">
+        <h1>{{request.user}}</h1>
+        <button><a href="/admin_panel/logout">logout</a></button>
+    </div>
+
+    <!-- slidebar -->
+    <div class="slidebar">
+        <details class="groups">
+            <summary>بخش کاربران</summary>
+            <div class="sub-groups">
+                <a href="/admin_panel/accounts">
+                    <h5>
+                        مشاهده کاربران
+                    </h5>
+                </a> 
+            </div>  
+        </details>
+    </div>
+
+    <div class="index">
+        <div class="item">
+            <div>
+                <label for="username">نام کاربری</label>
+                <input type="text" value="{{user.username}}" disabled="disabled"disabled="disabled">
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <label for="username">نام </label>
+                <input type="text" value="{{user.first_name}}" disabled="disabled">
+            </div>
+            <div>
+                <label for="username">فامیل</label>
+                <input type="text" value="{{user_last_name}}" disabled="disabled">
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <label for="username">ایمیل</label>
+                <input type="" value="{{user.email}}" disabled="disabled">
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <label for="username">active </label>
+                <input type="text" value="{{user.is_active}}" disabled="disabled">
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <label for="username">staff </label>
+                <input type="text" value="{{user.is_staff}}" disabled="disabled">
+            </div>
+        </div>
+        <div class="item">
+            <div>
+                <label for="username">superuser </label>
+                <input type="text" value="{{user.is_superuser}}" disabled="disabled">
+            </div>
+        </div>
+
+        <a href="../../../" class="back"> <button > بازگشت</button></a>
+
+    </div>
+    <script>
+        function active(id) {
+            id.children[1].setAttribute("class", "active");
+            id.setAttribute("onClick", "deactive(this)");
+        }
+
+        function deactive(id) {
+            id.children[1].setAttribute("class", "");
+            id.setAttribute("onClick", "active(this)");
+        }
+    </script>
+</body>
+
+</html>

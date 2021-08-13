@@ -1,0 +1,114 @@
+body {
+    background-color: #c0c0c0;
+    display: grid;
+    min-height: 100vh;
+    min-width: 100vh;
+    grid-template-columns: 30% 40% 30%;
+    grid-template-areas: ". . ." ". login ." ". login ." ". login ." ". . .";
+    margin: 0;
+}
+
+.login {
+    grid-area: login;
+    display: grid;
+    grid-template-rows: 30% 70%;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 20px 38px 34px -26px hsla(0, 0%, 0%, .2);
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+}
+
+.login .title {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    border-bottom: 1px solid rgb(63, 54, 54);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login .title p {
+    color: #C70039;
+    font-size: 3rem;
+    text-align: center;
+}
+
+.login form {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-rows: 40% 40% 20%;
+}
+
+.login form .row {
+    display: flex;
+}
+
+.login form .row label {
+    text-align: center;
+    margin: auto;
+    margin-left: 20px;
+}
+
+.login form .row input {
+    text-align: center;
+    margin: auto;
+    margin-right: 0;
+    width: 60%;
+    height: 20%;
+}
+
+.login form button {
+    width: 50%;
+    height: 50%;
+    margin: auto;
+}
+
+@media screen and (max-width: 1300px) {
+    body {
+        min-height: 100vh;
+        min-width: 100vh;
+        grid-template-columns: 15% 70% 15%;
+        grid-template-areas: ". . ." ". login ." ". login ." ". login ." ". . .";
+    }
+}
+
+@media screen and (max-width: 970px) {
+    body {
+        min-height: 100vh;
+        min-width: 0;
+        grid-template-columns: 15% 70% 15%;
+        grid-template-areas: ". . ." ". login ." ". login ." ". login ." ". . .";
+    }
+}
+
+@media screen and (max-width: 700px) {
+    body {
+        min-height: 100vh;
+        min-width: 0;
+        grid-template-columns: 100%;
+        grid-template-areas: "login";
+    }
+    .login {
+        grid-area: login;
+        display: grid;
+        grid-template-rows: 20% 80%;
+        background-color: rgb(255, 255, 255);
+        box-shadow: 0;
+        border-radius: 0;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .login .title {
+        width: 100%;
+        height: 100%;
+        margin: auto;
+        border-bottom: 1px solid rgb(63, 54, 54);
+    }
+    .login .title p {
+        color: #C70039;
+        font-size: 2rem;
+        text-align: center;
+    }
+}
