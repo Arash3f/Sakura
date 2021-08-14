@@ -50,12 +50,17 @@ class product_group_serializer(serializers.ModelSerializer):
         model = product_group
         fields = ('id','name' ,'group'  , 'picture' , 'slug')
 
-
-class product_search_group_serializer(serializers.ModelSerializer):
+class product_list_group_serializer(serializers.ModelSerializer):
     products = product_list_serializer(many=True)
     class Meta:
         model = product_group
-        fields = ('id','name' ,'products' )
+        fields = ('products',)
+
+class product_search_group_serializer(serializers.ModelSerializer):
+    sub_group = product_list_group_serializer(many=True)
+    class Meta:
+        model = product_group
+        fields = ('id','name' , 'sub_group' )
 
 class comments_serializer(serializers.ModelSerializer):
 
