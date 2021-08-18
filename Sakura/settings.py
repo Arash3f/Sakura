@@ -12,6 +12,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv() , default='127.0.0.1')
 
 INSTALLED_APPS = [
+    'django_jalali',
     # 'whitenoise.runserver_nostatic',# whitenoise
     'django.contrib.admin',
     'django.contrib.auth',
@@ -32,9 +33,14 @@ INSTALLED_APPS = [
     'panel',
     'site_model',
     'support',
+    
         # panel :
         'admin_panel',
         'admin_panel_accounts',
+        'admin_panel_accounting',
+        "admin_panel_store_materials",
+        "admin_panel_store_product",
+        "admin_panel_store_karaj",
 
     ####### Additional Apps ####### 
     'django_cleanup.apps.CleanupConfig', # clear (Automatically clear image file after delete) :

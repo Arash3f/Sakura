@@ -66,9 +66,13 @@ body {
 }
 .slidebar .groups .sub-groups{
     height: 50px;
-    display: block;
+    display: inline;
+    color: rebeccapurple;
     border-bottom: 1px solid rgb(0, 0, 0);
 
+}
+.slidebar .groups .sub-groups a{
+    border-bottom: 1px solid rgb(0, 0, 0);
 }
 .slidebar .groups a{
     height: 50px;
@@ -168,6 +172,38 @@ body {
     color: rgb(100, 171, 29);
 }
 
+
+/* ------ */
+.index .form-2 {
+    width: 90%;
+    height: 90%;
+    text-align: center;
+}
+
+.index .form-2 .row-2 {
+    width: 100%;
+    display: flex;
+    margin-top: 10px;
+}
+
+.index .form-2 .row-2 label {
+    width: 100px;
+    text-align: right;
+    margin-left: 20px;
+}
+
+.index .form-2 .row-2 input {
+    text-align: center;
+    margin: auto;
+    margin-right: 0;
+    width: 100%;
+}
+
+.index .form-2 button {
+    margin-top: 20px;
+    width: 100px;
+    color: rgb(100, 171, 29);
+}
 /*  download exel file */
 .index .excel a button{
     margin-top: 50px;
@@ -176,4 +212,139 @@ body {
 .index .excel a button{
     width: 200px;
     height: 50px;
+}
+/*body-btn  */
+.index .body-btn a button{
+    margin-top: 50px;
+}
+
+.index .body-btn a button{
+    width: 200px;
+    height: 50px;
+}
+
+
+
+/* search */
+.index .form-search{
+    width: 90%;
+    height: 200px;
+    text-align: right;
+}
+.index .form-search .search {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: #009879;
+    direction: rtl;
+}
+.index .form-search .search button{
+    width: 100px;
+}
+.index .form-search .search div label{
+    display: inline-block;
+    width: 100px;
+}
+
+
+.index-2 {
+    grid-area: in;
+    width: 100%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffffb7;
+}
+.index-2 .form-3{
+    display: contents;
+}
+.index-2 .form-3 .body-header{
+    width: 80%;
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffffb7;
+    border: 1px solid rgb(0, 0, 0);
+}
+.index-2 .body-header .row-3{
+    display: flex;
+    width: 80%;
+    margin: 20px;
+}
+.index-2 .body-header .row-3 .journal{
+    margin-right: auto;
+}
+.index-2 .body-header .row-3 .journal input{
+    text-align: center;
+}
+
+.index-2 .body-header .row-3 .date{
+    margin-left: auto;
+}
+.index-2 .body-header .row-3 .description{
+    text-align: right;
+    margin-left: auto;
+    width: 100%;
+}
+.index-2 .body-header .row-3 .description input{
+    width:80%;
+}
+
+.index-2 .table-journal  {
+    width: 80%;
+    align-items: center;
+    background-color: #ffffffb7;
+    border: 1px solid rgb(0, 0, 0);
+}
+.index-2 .table-journal .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    min-width: 80%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    text-align: right;
+    direction: rtl;
+}
+
+.index-2 .table-journal .styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+}
+
+.index-2 .table-journal .styled-table th,
+.inindex-2dex .table-journal .styled-table td {
+    padding: 12px 15px;
+}
+
+.index-2 .table-journal .styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+    height: 30px;
+}
+.index-2 .table-journal .styled-table tbody tr input{
+    width: 90%;
+}
+
+.index-2 .table-journal .styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.add{
+    width: 80%;
+    text-align: right;
+    margin: 5px;
+}
+
+.index-2 .form-3 .body-header .row-3 .count{
+    margin: auto;
+}
+.index-2 .form-3 .body-header .row-3 .count input{
+    text-align: center;
+}
+.create{
+    width: 100px;
+    height: 30px;
+    margin: auto;
 }
