@@ -1,0 +1,104 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+@font-face {
+    font-family: BYekan;
+    src: url(../../B_Yekan/Yekan.ttf);
+  }
+input, textarea, select { font-family:BYekan; }
+body {
+    background-color: #ffffff;
+    display: grid;
+    min-height: 100vh;
+    min-width: 100vh;
+    grid-template-columns: 90% 10%;
+    grid-template-rows: 50px auto;
+    grid-template-areas: "nv nv" "in sb" "in sb" "in sb" "in sb";
+    margin: 0;
+    font-family: BYekan;
+}
+
+/* header  */
+.header {
+    grid-area: nv;
+    display: flex;
+    flex-direction: row;
+    background-color: #ffffffce;
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.header h1 {
+    margin: auto 50px;
+    padding: 5px;
+    font-size: 1.5rem;
+    color: rgb(160, 60, 60);
+    border: 1px solid rgb(6, 136, 14);
+}
+
+.header button {
+    width: 100px;
+    margin: auto 50px;
+    height: 40px;
+    background-color: red;
+    border-radius: 10px;
+    margin-left: auto;
+}
+
+.header button a {
+    text-decoration-line: none;
+    color: rgb(255, 255, 255);
+}
+
+/* slidbar */
+.slidebar {
+    grid-area: sb;
+    background-color: #eea40544;
+}
+.slidebar .groups summary{
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    border-bottom: 1px solid rgb(0, 0, 0);
+
+}
+.slidebar .groups .sub-groups{
+    height: 50px;
+    display: inline;
+    color: rebeccapurple;
+    border-bottom: 1px solid rgb(0, 0, 0);
+
+}
+.slidebar .groups .sub-groups a{
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+.slidebar .groups a{
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7rem;
+    margin-top: 0;
+    text-decoration-line: none;
+
+}
+
+/* index */
+.index {
+    grid-area: in;
+    width: 100%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffffb7;
+}

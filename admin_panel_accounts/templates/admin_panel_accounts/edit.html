@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static '/accounting/css/style_index.css' %}" />
+    <title>index</title>
+</head>
+
+<body>
+
+    <!-- header -->
+    <div class="header">
+        <h1>{{request.user}}</h1>
+        <button><a href="/admin_panel/logout">logout</a></button>
+    </div>
+
+    <!-- slidebar -->
+    <div class="slidebar">
+        <details class="groups">
+            <summary>بخش کاربران</summary>
+            <div class="sub-groups">
+                <a href="/admin_panel/accounts">
+                    <h5>
+                        مشاهده کاربران
+                    </h5>
+                </a> 
+            </div>  
+        </details>
+    </div>
+
+    <div class="index">
+        <form method="POST">
+            {% csrf_token %}
+            {% if form.errors %}
+                {% for error in form.errors %}
+                    {{ error|escape }} مشکل در 
+                {% endfor %}
+            {% endif %}
+        
+            <div class="row">
+                {{ form.username }}
+                <label for="username">نام کاربری</label>
+            </div>
+            <div class="row">
+                {{ form.first_name }}
+                <label for="first_name">نام </label>
+            </div>
+            <div class="row">
+                {{ form.last_name }}
+                <label for="last_name">فامیل </label>
+            </div>
+            <div class="row">
+                {{ form.email }}
+                <label for="email">ایمیل </label>
+            </div>
+            <div class="row">
+                {{ form.is_active }}
+                <label for="is_active">active</label>
+            </div>
+            <div class="row">
+                {{ form.is_staff }}
+                <label for="is_staff">staff</label>
+            </div>
+            <div class="row">
+                {{ form.is_superuser }}
+                <label for="is_superuser">superuser</label>
+            </div>
+            <button type="submit">ثبت</button>
+        </form>
+
+        <a href="../../../" class="back"> <button > بازگشت</button></a>
+
+    </div>
+    <script>
+        function active(id) {
+            id.children[1].setAttribute("class", "active");
+            id.setAttribute("onClick", "deactive(this)");
+        }
+
+        function deactive(id) {
+            id.children[1].setAttribute("class", "");
+            id.setAttribute("onClick", "active(this)");
+        }
+    </script>
+</body>
+
+</html>

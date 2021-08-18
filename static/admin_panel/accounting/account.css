@@ -1,0 +1,149 @@
+@keyframes button {
+    from {
+        background-color: rgba(121, 130, 130, 0.099);
+        color: rgb(129, 210, 30);
+    }
+    to {
+        background-color: rgb(200, 200, 200);
+        color: rgb(255, 60, 0);
+    }
+}
+@keyframes btn_search {
+    from {
+        background-color: rgba(31, 203, 31, 0.496);
+    }
+    to {
+        background-color: rgb(31, 203, 31);
+    }
+}
+/* header */
+.button-header{
+    margin-top: 50px;
+    width: 50%;
+    text-align: center;
+}
+.button-header a button{
+    width: 200px;
+    height: 50px;
+    background-color: rgba(121, 130, 130, 0.099);
+    color: rgb(129, 210, 30);
+    border-radius: 10px;
+}
+.button-header a button:hover {
+    animation-name: button;
+    animation-duration: 1s;
+    background-color: rgb(200, 200, 200);
+    color: rgb(255, 60, 0);
+    cursor: pointer;
+}
+
+/* table */
+.base-table-style {
+    border-collapse: collapse;
+    min-width: 80%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin: 50px auto;
+    direction: rtl;
+    text-align: center;
+}
+
+.base-table-style thead tr {
+    background-color: #1118e3;
+    color: #c2f40d;
+    font-size: 0.9rem;
+}
+
+.base-table-style th,
+.base-table-style td {
+    padding: 12px 0px;
+    max-width: 300px;
+}
+.base-table-style td input{
+    width: 100%;
+    border: none;
+}
+
+.base-table-style tbody tr {
+    border-bottom: 1px solid #dddddd;
+    font-size: 0.9rem;
+}
+
+.base-table-style tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+/* form */
+.index .form-search{
+    width: 80%;
+}
+.index .form-search .search {
+    margin-top: 30px;
+    direction: rtl;
+}
+.index .form-search .search div label{
+    display: inline-block;
+    width: 50px;
+}
+.index .form-search .search button{
+    width: 100px;
+    color: rgb(255, 255, 255);
+    background-color: rgba(31, 203, 31, 0.496);
+    border-radius: 5px;
+    margin-top: 10px;
+}
+.index .form-search .search button:hover{
+    animation-name: btn_search;
+    animation-duration: 1s;
+    background-color: rgb(31, 203, 31);
+    cursor: pointer;
+}
+/* form create */
+.form-create{
+    width: 80%;
+    margin-top: 50px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffffb7;
+    border: 1px solid rgb(0, 0, 0); 
+}
+.body-end{
+    width:80%;
+}
+.result{
+    width: 100%;
+    display: flex; 
+    justify-content: center;
+    text-align: center;
+}
+.result div{
+    margin: 20px;
+}
+.result div input{
+    text-align: center;
+}
+.submit{
+    width: 200px;
+}
+.submit button{
+    width: 100%;
+    color: rgb(255, 255, 255);
+    background-color: rgb(6, 254, 6);
+    border-radius: 5px;
+}
+.submit button:hover{
+    animation-name: btn_search;
+    animation-duration: 1s;
+    background-color: rgba(6, 254, 6, 0.729);
+    cursor: pointer;
+}
+.back{
+    width: 100%;
+    color: rgb(255, 0, 0);
+    background-color: rgb(132, 169, 132);
+    border-radius: 5px;
+    margin-top: 50px;
+}
+.back:hover{
+    cursor: pointer;
+}

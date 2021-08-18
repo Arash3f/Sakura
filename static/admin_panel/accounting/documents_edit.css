@@ -1,0 +1,166 @@
+@keyframes button {
+    from {
+        background-color: rgba(31, 203, 31, 0.496);
+    }
+    to {
+        background-color: rgb(31, 203, 31);
+    }
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+/* header */
+.form{
+    display: contents;
+}
+.body-header{
+    width: 90%;
+    margin-top: 50px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffffb7;
+    border: 1px solid rgb(0, 0, 0);
+}
+.header-div{
+    display: flex;
+    width: 90%;
+    margin: 5px;
+}
+.journal input{
+    text-align: center;
+}
+.date{
+    margin-left: auto;
+}
+.date input{
+    text-align: center;
+}
+.description{
+    text-align: right;
+    margin-left: auto;
+    width: 100%;
+    display: flex;
+}
+.description label{
+    margin-left: 5px;
+}
+.description input{
+    width:100%;
+    direction: rtl;
+}
+
+
+/* table */
+
+.base-table-style {
+    border-collapse: collapse;
+    width: 90%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin-top: 50px ;
+    direction: rtl;
+    text-align: center;
+    column-width: 10px;
+}
+
+.base-table-style thead tr {
+    background-color: #1118e3;
+    color: #c2f40d;
+    font-size: 0.9rem;
+}
+.check_row{
+    width: 1%;
+}
+.id{
+    width: 10%;
+}
+.name{
+    width: 10%;
+}
+.debtor{
+    width: 10%;
+}
+.creditor{
+    width: 10%;
+}
+
+.base-table-style th,
+.base-table-style td {
+    padding: 12px 0px;
+    max-width: 100%;
+}
+.base-table-style td input{
+    width: 90%;
+    border: none;
+    text-align: center;
+
+}
+.check-row{
+    color: red;
+    background-color: rgb(255, 255, 255);
+}
+.check-row:hover{
+    cursor: pointer;
+}
+.base-table-style td input:focus{
+    outline: none;
+
+}
+.base-table-style tbody tr {
+    border-bottom: 1px solid #dddddd;
+    font-size: 0.9rem;
+}
+.add{
+    display:flex ;
+    justify-content: right;
+    width: 90%;
+}
+.add button{
+    margin-top: 10px;
+    width: 100px;
+    color: rgb(255, 255, 255);
+    background-color: rgba(31, 203, 31, 0.496);
+    border-radius: 5px;
+}
+.add button:hover{
+    animation-name: button;
+    animation-duration: 1s;
+    background-color: rgb(31, 203, 31);
+    cursor: pointer;
+} 
+/* end */
+.body-end{
+    width:50%;
+    margin-top: 50px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffffb7;
+    border: 1px solid rgb(0, 0, 0); 
+}
+.result{
+    width: 100%;
+    display: flex; 
+    justify-content: center;
+    text-align: center;
+}
+.result div{
+    margin: 20px;
+}
+.result div input{
+    text-align: center;
+}
+
+/* btn submit */
+.submit{
+    display: none;
+}

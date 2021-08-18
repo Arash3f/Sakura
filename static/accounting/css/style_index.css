@@ -1,0 +1,350 @@
+body {
+    background-color: #c0c0c0;
+    display: grid;
+    min-height: 100vh;
+    min-width: 100vh;
+    grid-template-columns: 80% 20%;
+    grid-template-rows: 50px auto;
+    grid-template-areas: "nv nv" "in sb" "in sb" "in sb" "in sb";
+    margin: 0;
+}
+
+.header {
+    grid-area: nv;
+    display: flex;
+    flex-direction: row;
+    background-color: #ffffffce;
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+
+.header h1 {
+    margin: auto 50px;
+    padding: 5px;
+    font-size: 1.5rem;
+    color: rgb(160, 60, 60);
+    border: 1px solid rgb(6, 136, 14);
+}
+
+.header button {
+    width: 100px;
+    margin: auto 50px;
+    height: 40px;
+    background-color: red;
+    border-radius: 10px;
+    margin-left: auto;
+}
+
+.header button a {
+    text-decoration-line: none;
+    color: rgb(255, 255, 255);
+}
+
+.index {
+    grid-area: in;
+    width: 100%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffffb7;
+}
+
+.slidebar {
+    grid-area: sb;
+    background-color: #eea40544;
+}
+.slidebar .groups summary{
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    border-bottom: 1px solid rgb(0, 0, 0);
+
+}
+.slidebar .groups .sub-groups{
+    height: 50px;
+    display: inline;
+    color: rebeccapurple;
+    border-bottom: 1px solid rgb(0, 0, 0);
+
+}
+.slidebar .groups .sub-groups a{
+    border-bottom: 1px solid rgb(0, 0, 0);
+}
+.slidebar .groups a{
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.7rem;
+    margin-top: 0;
+    text-decoration-line: none;
+
+}
+.index .styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 80%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    margin: 50px auto;
+    text-align: right;
+    direction: rtl;
+}
+
+.index .styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+}
+
+.index .styled-table th,
+.index .styled-table td {
+    padding: 12px 15px;
+}
+
+.index .styled-table td img {
+    width: 50px;
+    height: 50px;
+}
+
+.index .styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.index .styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+
+
+/* account detail  */
+
+.index .item {
+    display: flex;
+    flex-direction: row;
+}
+.index .item div{
+    margin: 25px;
+}
+.index .back{
+    width: 80%;
+    float: left;
+}
+.index .back button{
+    color: blueviolet;
+}
+
+
+/* تغییر */
+
+.index form {
+    width: 60%;
+    height: 60%;
+    text-align: center;
+}
+
+.index form .row {
+    width: 100%;
+    display: flex;
+    margin-top: 10px;
+}
+
+.index form .row label {
+    width: 100px;
+    text-align: right;
+    margin-left: 20px;
+}
+
+.index form .row input {
+    text-align: center;
+    margin: auto;
+    margin-right: 0;
+    width: 100%;
+}
+
+.index form button {
+    margin-top: 20px;
+    width: 100px;
+    color: rgb(100, 171, 29);
+}
+
+
+/* ------ */
+.index .form-2 {
+    width: 90%;
+    height: 90%;
+    text-align: center;
+}
+
+.index .form-2 .row-2 {
+    width: 100%;
+    display: flex;
+    margin-top: 10px;
+}
+
+.index .form-2 .row-2 label {
+    width: 100px;
+    text-align: right;
+    margin-left: 20px;
+}
+
+.index .form-2 .row-2 input {
+    text-align: center;
+    margin: auto;
+    margin-right: 0;
+    width: 100%;
+}
+
+.index .form-2 button {
+    margin-top: 20px;
+    width: 100px;
+    color: rgb(100, 171, 29);
+}
+/*  download exel file */
+.index .excel a button{
+    margin-top: 50px;
+}
+
+.index .excel a button{
+    width: 200px;
+    height: 50px;
+}
+/*body-btn  */
+.index .body-btn a button{
+    margin-top: 50px;
+}
+
+.index .body-btn a button{
+    width: 200px;
+    height: 50px;
+}
+
+
+
+/* search */
+.index .form-search{
+    width: 90%;
+    height: 200px;
+    text-align: right;
+}
+.index .form-search .search {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: #009879;
+    direction: rtl;
+}
+.index .form-search .search button{
+    width: 100px;
+}
+.index .form-search .search div label{
+    display: inline-block;
+    width: 100px;
+}
+
+
+.index-2 {
+    grid-area: in;
+    width: 100%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffffb7;
+}
+.index-2 .form-3{
+    display: contents;
+}
+.index-2 .form-3 .body-header{
+    width: 80%;
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #ffffffb7;
+    border: 1px solid rgb(0, 0, 0);
+}
+.index-2 .body-header .row-3{
+    display: flex;
+    width: 80%;
+    margin: 20px;
+}
+.index-2 .body-header .row-3 .journal{
+    margin-right: auto;
+}
+.index-2 .body-header .row-3 .journal input{
+    text-align: center;
+}
+
+.index-2 .body-header .row-3 .date{
+    margin-left: auto;
+}
+.index-2 .body-header .row-3 .description{
+    text-align: right;
+    margin-left: auto;
+    width: 100%;
+}
+.index-2 .body-header .row-3 .description input{
+    width:80%;
+}
+
+.index-2 .table-journal  {
+    width: 80%;
+    align-items: center;
+    background-color: #ffffffb7;
+    border: 1px solid rgb(0, 0, 0);
+}
+.index-2 .table-journal .styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    min-width: 80%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    text-align: right;
+    direction: rtl;
+}
+
+.index-2 .table-journal .styled-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+}
+
+.index-2 .table-journal .styled-table th,
+.inindex-2dex .table-journal .styled-table td {
+    padding: 12px 15px;
+}
+
+.index-2 .table-journal .styled-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+    height: 30px;
+}
+.index-2 .table-journal .styled-table tbody tr input{
+    width: 90%;
+}
+
+.index-2 .table-journal .styled-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.add{
+    width: 80%;
+    text-align: right;
+    margin: 5px;
+}
+
+.index-2 .form-3 .body-header .row-3 .count{
+    margin: auto;
+}
+.index-2 .form-3 .body-header .row-3 .count input{
+    text-align: center;
+}
+.create{
+    width: 100px;
+    height: 30px;
+    margin: auto;
+}

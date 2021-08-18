@@ -1,0 +1,49 @@
+{% extends "admin_panel/_base.html" %}
+{% load static %}
+{% block header %}
+<link rel="stylesheet" href="{% static '/admin_panel/_base/style.css' %}" />
+<link rel="stylesheet" href="{% static '/admin_panel/accounting/account.css' %}" />
+<title>حساب ها</title>
+{% endblock %}
+
+{% block body %}
+<div class="button-header">
+    <a href="add/"><button> اضافه کردن</button></a>
+    <a href="export/xls/"><button> دانلود فایل اکسل</button></a>
+</div>
+<form class="form-search"  method="POST">
+    {% csrf_token %}
+    <div class="search">
+        <div>
+            <label for="first_name">کد</label>
+            <input type="number" name="id" >
+        </div>
+        <button type="submit">سرچ</button>
+    </div>
+</form>
+<table class="base-table-style">
+    <thead>
+        <tr>
+            <th> کد حساب</th>
+            <th>نام حساب</th>
+            <th>تغییرات</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for account in accounts %}
+        <tr>
+            <td>{{account.id}}</td>
+            <td>{{account.name}}</td>
+            <td>
+                <a href="edit/{{account.pk}}/">تغییرات</a>
+                <a style="color: red;" href="remove/{{account.pk}}/">حذف</a>
+            </td>
+        </tr>
+        {% endfor%}
+
+    </tbody>
+</table>
+{% endblock %}
+
+{% block script %}
+{% endblock %}
