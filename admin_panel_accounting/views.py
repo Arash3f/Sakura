@@ -8,11 +8,11 @@ from django.db.models import Q, Sum
 # Create your views here.
 
 def panel_accounting(request):
-    account = models.account.objects.all()
+    account = models.account.objects.all().order_by("id")
     if request.method == "POST":
         id = request.POST['id']
         if id != "":
-            account = account.filter(id=id)
+            account = account.filter(id=id).order_by("id")
     data = {
         "accounts":account
     }
@@ -66,7 +66,7 @@ def export_accounts_xls(request):
         ws.write(row_num, col_num, columns[col_num], font_style)
     # Sheet body, remaining rows
     font_style = xlwt.XFStyle()
-    rows = models.account.objects.all().values_list('id', 'name' ,)
+    rows = models.account.objects.all().order_by("id").values_list('id', 'name' ,)
     for row in rows:
         row_num += 1
         for col_num in range(len(row)):
@@ -79,7 +79,7 @@ def export_accounts_xls(request):
 #  document :
 
 def panel_document(request):
-    document = models.document.objects.all()
+    document = models.document.objects.all().order_by("id")
     if request.method == "POST":
         id = request.POST['id']
         date = request.POST['date']
@@ -92,20 +92,20 @@ def panel_document(request):
                     document = models.document.objects.filter(id = id)
             else:
                 if id == "" :
-                    document = models.document.objects.filter(description__icontains = description)
+                    document = models.document.objects.filter(description__icontains = description).order_by("id")
                 else:
-                    document = models.document.objects.filter(Q(description__icontains = description)|Q(id = id))
+                    document = models.document.objects.filter(Q(description__icontains = description)|Q(id = id)).order_by("id")
         else:
             if description == "":
                 if id == "" :
-                    document = models.document.objects.filter(date = date)
+                    document = models.document.objects.filter(date = date).order_by("id")
                 else : 
-                    document = models.document.objects.filter(Q(id = id)|Q(date = date))
+                    document = models.document.objects.filter(Q(id = id)|Q(date = date)).order_by("id")
             else:
                 if id == "" :
-                    document = models.document.objects.filter(Q(description__icontains = description)|Q(date = date))
+                    document = models.document.objects.filter(Q(description__icontains = description)|Q(date = date)).order_by("id")
                 else :
-                    document = models.document.objects.filter(Q(description__icontains = description)|Q(id = id)|Q(date = date))
+                    document = models.document.objects.filter(Q(description__icontains = description)|Q(id = id)|Q(date = date)).order_by("id")
 
     data = {
         "documents":document
@@ -203,7 +203,7 @@ def export_document_xls(request):
         ws.write(row_num, col_num, columns[col_num], font_style)
     # Sheet body, remaining rows
     font_style = xlwt.XFStyle()
-    rows = models.document.objects.all().values_list('id', 'date' ,'description')
+    rows = models.document.objects.all().order_by("id").values_list('id', 'date' ,'description')
     for row in rows:
         row_num += 1
         for col_num in range(len(row)):
@@ -217,7 +217,7 @@ def check_accounts(request ):
     if request.method == "POST":
         id = request.POST['id']
         if id == "":
-            accounts = models.account.objects.all()
+            accounts = models.account.objects.all().order_by("id")
             sum_debtors =models.journal.objects.aggregate(Sum('debtor'))['debtor__sum']
             sum_creditors = models.journal.objects.aggregate(Sum('creditor'))['creditor__sum']
             result = sum_debtors - sum_creditors
@@ -230,7 +230,7 @@ def check_accounts(request ):
             else:
                 return render(request, 'admin_panel_accounting/check_accounts.html')
     else:
-        accounts = models.account.objects.all()
+        accounts = models.account.objects.all().order_by("id")
         sum_debtors =models.journal.objects.aggregate(Sum('debtor'))['debtor__sum']
         sum_creditors = models.journal.objects.aggregate(Sum('creditor'))['creditor__sum']
         result = sum_debtors - sum_creditors
@@ -281,7 +281,7 @@ def export_check_accounts_xls(request):
     # Sheet body, remaining rows
     font_style = xlwt.XFStyle()
 
-    accounts = models.account.objects.all()
+    accounts = models.account.objects.all().order_by("id")
 
 
     sum_debtors =models.journal.objects.aggregate(Sum('debtor'))['debtor__sum']
@@ -333,7 +333,7 @@ def export_check_accounts_xls(request):
     return response
 
 def report_one(request ):
-    document = models.document.objects.all()
+    document = models.document.objects.all().order_by("id")
     if request.method == "POST":
         list = []
         id = request.POST['id']
