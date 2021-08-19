@@ -24,7 +24,7 @@ def account_edit(request , pk ):
     if request.method == "POST":
         form = forms.account_edit_form(request.POST, instance=account)
         if form.is_valid():
-            journals = models.journal.objects.filter(account = account)
+            journals = models.journal2.objects.filter(account = account)
             if journals.count() == 0 :
                 form.save()
             else:
@@ -36,7 +36,7 @@ def account_edit(request , pk ):
 
 def account_remove(request , pk ):
     account = models.account.objects.get(id = pk)
-    journals = models.journal.objects.filter(account=account)
+    journals = models.journal2.objects.filter(account=account)
     if not journals :
         account.delete()
     return redirect("panel_accounting" )
@@ -132,7 +132,7 @@ def document_add(request ):
             if code[i]=="" or name[i]=="":
                 break
             account = models.account.objects.get(id=code[i] , name=name[i])
-            models.journal.objects.create(document = document , account = account ,description = description[i] ,debtor=debtor[i],creditor=creditor[i])
+            models.journal2.objects.create(document = document , account = account ,description = description[i] ,debtor=debtor[i],creditor=creditor[i])
         return redirect("panel_document" )
 
     if models.document.objects.all().count()!=0 :
@@ -174,7 +174,7 @@ def document_edit(request , pk ):
             if code[i]=="" or name[i]=="":
                 break
             account = models.account.objects.get(id=code[i] , name=name[i])
-            models.journal.objects.create(document = document , account = account ,description = description[i] ,debtor=debtor[i].replace(",",""),creditor=creditor[i].replace(",",""))
+            models.journal2.objects.create(document = document , account = account ,description = description[i] ,debtor=debtor[i].replace(",",""),creditor=creditor[i].replace(",",""))
         
         return redirect("panel_document" )
 
@@ -218,21 +218,21 @@ def check_accounts(request ):
         id = request.POST['id']
         if id == "":
             accounts = models.account.objects.all().order_by("id")
-            sum_debtors =models.journal.objects.aggregate(Sum('debtor'))['debtor__sum']
-            sum_creditors = models.journal.objects.aggregate(Sum('creditor'))['creditor__sum']
+            sum_debtors =models.journal2.objects.aggregate(Sum('debtor'))['debtor__sum']
+            sum_creditors = models.journal2.objects.aggregate(Sum('creditor'))['creditor__sum']
             result = sum_debtors - sum_creditors
         else:
             if models.account.objects.filter(id = id).exists():
                 accounts = models.account.objects.filter(id = id)
-                sum_debtors =models.journal.objects.filter(account=accounts[0]).aggregate(Sum('debtor'))['debtor__sum']
-                sum_creditors = models.journal.objects.filter(account=accounts[0]).aggregate(Sum('creditor'))['creditor__sum']
+                sum_debtors =models.journal2.objects.filter(account=accounts[0]).aggregate(Sum('debtor'))['debtor__sum']
+                sum_creditors = models.journal2.objects.filter(account=accounts[0]).aggregate(Sum('creditor'))['creditor__sum']
                 result = sum_debtors - sum_creditors
             else:
                 return render(request, 'admin_panel_accounting/check_accounts.html')
     else:
         accounts = models.account.objects.all().order_by("id")
-        sum_debtors =models.journal.objects.aggregate(Sum('debtor'))['debtor__sum']
-        sum_creditors = models.journal.objects.aggregate(Sum('creditor'))['creditor__sum']
+        sum_debtors =models.journal2.objects.aggregate(Sum('debtor'))['debtor__sum']
+        sum_creditors = models.journal2.objects.aggregate(Sum('creditor'))['creditor__sum']
         result = sum_debtors - sum_creditors
 
     journals_list = []
@@ -240,7 +240,7 @@ def check_accounts(request ):
         new_dic = {}
         debtors = 0
         creditors = 0
-        journals = models.journal.objects.filter(account=account)
+        journals = models.journal2.objects.filter(account=account)
         for journal in journals :
             debtors += journal.debtor
             creditors += journal.creditor
@@ -284,8 +284,8 @@ def export_check_accounts_xls(request):
     accounts = models.account.objects.all().order_by("id")
 
 
-    sum_debtors =models.journal.objects.aggregate(Sum('debtor'))['debtor__sum']
-    sum_creditors = models.journal.objects.aggregate(Sum('creditor'))['creditor__sum']
+    sum_debtors =models.journal2.objects.aggregate(Sum('debtor'))['debtor__sum']
+    sum_creditors = models.journal2.objects.aggregate(Sum('creditor'))['creditor__sum']
     item_list = []
     sum_debtors = 0
     sum_creditors = 0
@@ -294,9 +294,9 @@ def export_check_accounts_xls(request):
         list=[]
         list.append(account.id)
         list.append(account.name)
-        if models.journal.objects.filter(account=account).exists():
-            debtor =models.journal.objects.filter(account=account).aggregate(Sum('debtor'))['debtor__sum']
-            creditor = models.journal.objects.filter(account=account).aggregate(Sum('creditor'))['creditor__sum']
+        if models.journal2.objects.filter(account=account).exists():
+            debtor =models.journal2.objects.filter(account=account).aggregate(Sum('debtor'))['debtor__sum']
+            creditor = models.journal2.objects.filter(account=account).aggregate(Sum('creditor'))['creditor__sum']
             sum_debtors += int(debtor)
             sum_creditors += int(creditor)
             list.append(debtor)

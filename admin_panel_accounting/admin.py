@@ -5,8 +5,8 @@ from admin_panel_accounting import models
 @admin.register(models.account)
 class account(admin.ModelAdmin):
     field = "__all__"
-@admin.register(models.journal)
-class journal(admin.ModelAdmin):
+@admin.register(models.journal2)
+class journal2(admin.ModelAdmin):
     field = "__all__"
 @admin.register(models.document)
 class document(admin.ModelAdmin):

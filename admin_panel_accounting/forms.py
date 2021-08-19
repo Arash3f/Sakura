@@ -26,5 +26,5 @@ class journal_edit_form(forms.ModelForm):
     # account  = inlineformset_factory(models.account, fields=('id', 'name'))
 
     class Meta:
-        model = models.journal
+        model = models.journal2
         fields = ['account','description', 'debtor' , 'creditor']

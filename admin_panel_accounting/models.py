@@ -17,7 +17,7 @@ class document(models.Model):
     def __str__(self):
         return str(self.id)
 
-class journal(models.Model):
+class journal2(models.Model):
     document = models.ForeignKey('document' , on_delete=models.CASCADE , related_name='journals')
     account = models.ForeignKey('account' , related_name="journals" , on_delete=models.CASCADE)
     description = models.TextField()
