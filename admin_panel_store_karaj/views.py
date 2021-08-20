@@ -4,7 +4,7 @@ from admin_panel_store_karaj import forms
 from django.http import HttpResponse
 import xlwt
 from django.db.models import Q, Sum
-
+from django.core.paginator import Paginator, PageNotAnInteger,EmptyPage
 # Create your views here.
 
 def panel_product(request):

@@ -9,7 +9,6 @@
 {% block body %}
 <form class="form-create" method="POST">
     {% csrf_token %}
-    {% csrf_token %}
     {% if form.errors %}
         {{ form.name.errors }}
     {% endif %}

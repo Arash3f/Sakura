@@ -5,6 +5,7 @@ from django.contrib.auth import login as auth_login
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from admin_panel import decorators
 
 def login(request):
     form = login_form(request.POST or None)
@@ -28,5 +29,6 @@ def logout_user(request):
     return redirect("panel_login" )
 
 @login_required(login_url='/admin_panel/login')
+@decorators.level_one
 def panel(request):
     return render(request, 'admin_panel/panel.html')

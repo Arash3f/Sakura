@@ -1,83 +1,41 @@
+{% extends "admin_panel/_base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
+{% block header %}
+<link rel="stylesheet" href="{% static '/admin_panel/_base/style.css' %}" />
+<link rel="stylesheet" href="{% static '/admin_panel/accounting/account.css' %}" />
+<title>کاربران</title>
+{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static '/accounting/css/style_index.css' %}" />
-    <title>index</title>
-</head>
+{% block body %}
+<div class="button-header">
+    <a href="{% url 'export_users_xls' %}"><button> دانلود فایل اکسل</button></a>
+</div>
+<table class="base-table-style">
+    <thead>
+        <tr>
+            <th>نام کاربری</th>
+            <th> active </th>
+            <th> سطح </th>
+            <th>تغییرات</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{user.user.username}}</td>
+            <td>{{user.user.is_active}}</td>
+            <td>{{user.accessibility}}</td>
+            <td class="change">
+                <a style="color: blue; " href="user/detail/{{user.pk}}/">مشاهده</a>
+                <a style="color: green;" href="user/edit/{{user.pk}}/">تغییرات</a>
+                <a style="color: red; " href="user/remove/{{user.pk}}/">حذف</a>
+            </td>
+        </tr>
+        {% endfor%}
 
-<body>
+    </tbody>
+</table>
+{% endblock %}
 
-    <!-- header -->
-    <div class="header">
-        <h1>{{request.user}}</h1>
-        <button><a href="/admin_panel/logout">logout</a></button>
-    </div>
-
-    <!-- slidebar -->
-    <div class="slidebar">
-        <details class="groups">
-            <summary>بخش کاربران</summary>
-            <div class="sub-groups">
-                <a href="/admin_panel/accounts">
-                    <h5>
-                        مشاهده کاربران
-                    </h5>
-                </a> 
-            </div>  
-        </details>
-    </div>
-
-    <div class="index">
-        <div class="excel">
-            <a href="{% url 'export_users_xls' %}"><button> دانلود فایل اکسل</button></a>
-        </div>
-        <table class="styled-table">
-            <thead>
-                <tr>
-                    <th>نام کاربری</th>
-                    <th> active </th>
-                    <th> staff </th>
-                    <th> superuser </th>
-                    <th>تغییرات</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for user in users %}
-                <tr>
-                    <td>{{user.username}}</td>
-                    <td>{{user.is_active}}</td>
-                    <td>{{user.is_staff}}</td>
-                    <td>{{user.is_superuser}}</td>
-                    <td>
-                        <a href="user/detail/{{user.pk}}/"><img src="{% static 'admin_panel/accounts/img/look+no+hide.png' %}"></a>
-                        <a href="user/edit/{{user.pk}}/"><img src="{% static 'admin_panel/accounts/img/3703031-middle.png' %}"></a>
-                        <a href="user/remove/{{user.pk}}/"><img src="{% static 'admin_panel/accounts/img/delete-sign.png' %}"></a>
-                    </td>
-                </tr>
-                {% endfor%}
-
-            </tbody>
-        </table>
-
-
-
-    </div>
-    <script>
-        function active(id) {
-            id.children[1].setAttribute("class", "active");
-            id.setAttribute("onClick", "deactive(this)");
-        }
-
-        function deactive(id) {
-            id.children[1].setAttribute("class", "");
-            id.setAttribute("onClick", "active(this)");
-        }
-    </script>
-</body>
-
-</html>
+{% block script %}
+{% endblock %}

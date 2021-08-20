@@ -1,23 +1,40 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from admin_panel_accounting import models
 from admin_panel_accounting import forms
 from django.http import HttpResponse
 import xlwt
 from django.db.models import Q, Sum
+from django.contrib.auth.decorators import login_required
+from admin_panel import decorators
+from django.core.paginator import Paginator, PageNotAnInteger,EmptyPage
 
-# Create your views here.
 
+@login_required
+@decorators.level_one
 def panel_accounting(request):
     account = models.account.objects.all().order_by("id")
     if request.method == "POST":
         id = request.POST['id']
         if id != "":
             account = account.filter(id=id).order_by("id")
+
+    paginator = Paginator(account ,6 )
+    page = request.GET.get('page')
+
+    try:
+        account = paginator.page(page)
+    except PageNotAnInteger:
+        account = paginator.page(1)
+    except EmptyPage:
+        account = paginator.page(paginator.num_pages)
+
     data = {
         "accounts":account
     }
     return render(request, 'admin_panel_accounting/account.html',context=data)
 
+@login_required
+@decorators.level_three
 def account_edit(request , pk ):
     account = models.account.objects.get(id = pk)
     
@@ -27,6 +44,7 @@ def account_edit(request , pk ):
             journals = models.journal2.objects.filter(account = account)
             if journals.count() == 0 :
                 form.save()
+                return redirect("admin_panel_accounting:panel_accounting" )
             else:
                 form.add_error("name", " ابتدا تمامی اطلاعات این حساب را در دفتر روزنامه پاک کنید .")
     else:
@@ -34,24 +52,30 @@ def account_edit(request , pk ):
     context={"form":form}
     return render(request , "admin_panel_accounting/account_edit.html" , context)
 
+@login_required
+@decorators.level_three
 def account_remove(request , pk ):
     account = models.account.objects.get(id = pk)
     journals = models.journal2.objects.filter(account=account)
     if not journals :
         account.delete()
-    return redirect("panel_accounting" )
+    return redirect("admin_panel_accounting:panel_accounting" )
 
+@login_required
+@decorators.level_two
 def account_add(request ):
     form = forms. account_add_form(request.POST or None)
     if request.method == "POST":
         if form.is_valid():
             form.save()
-            return redirect("panel_accounting" )
+            return redirect("admin_panel_accounting:panel_accounting" )
         else:
             form.add_error("name", "قبلا حسابی با این کد ساخته شده است")
     context={"form":form}
     return render(request , "admin_panel_accounting/account_add.html" , context)
 
+@login_required
+@decorators.level_one
 def export_accounts_xls(request):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename="account.xls"'
@@ -77,7 +101,8 @@ def export_accounts_xls(request):
     return response
 
 #  document :
-
+@login_required
+@decorators.level_one
 def panel_document(request):
     document = models.document.objects.all().order_by("id")
     if request.method == "POST":
@@ -106,16 +131,26 @@ def panel_document(request):
                     document = models.document.objects.filter(Q(description__icontains = description)|Q(date = date)).order_by("id")
                 else :
                     document = models.document.objects.filter(Q(description__icontains = description)|Q(id = id)|Q(date = date)).order_by("id")
+    paginator = Paginator(document ,6 )
+    page = request.GET.get('page')
 
+    try:
+        document = paginator.page(page)
+    except PageNotAnInteger:
+        document = paginator.page(1)
+    except EmptyPage:
+        document = paginator.page(paginator.num_pages)
     data = {
         "documents":document
     }
     return render(request, 'admin_panel_accounting/document.html',context=data)
 
+@login_required
+@decorators.level_two
 def document_add(request ):
     if request.method == "POST":
-        sum_debtor = request.POST['sum_debtor'][0]
-        sum_creditor = request.POST['sum_creditor'][0]
+        sum_debtor = request.POST['sum_debtor'][0].replace(",","")
+        sum_creditor = request.POST['sum_creditor'][0].replace(",","")
         if sum_debtor != sum_creditor or sum_debtor=="0" or sum_creditor=="0":
             return redirect("document_add" )
         document_id = request.POST['document_id']
@@ -132,8 +167,8 @@ def document_add(request ):
             if code[i]=="" or name[i]=="":
                 break
             account = models.account.objects.get(id=code[i] , name=name[i])
-            models.journal2.objects.create(document = document , account = account ,description = description[i] ,debtor=debtor[i],creditor=creditor[i])
-        return redirect("panel_document" )
+            models.journal2.objects.create(document = document , account = account ,description = description[i]  ,debtor=debtor[i].replace(",",""),creditor=creditor[i].replace(",",""))
+        return redirect("admin_panel_accounting:panel_document" )
 
     if models.document.objects.all().count()!=0 :
         document_last_id = models.document.objects.latest('id').id +1
@@ -147,6 +182,8 @@ def document_add(request ):
     }
     return render(request , "admin_panel_accounting/document_add.html" , context)
 
+@login_required
+@decorators.level_three
 def document_edit(request , pk ):
     document = models.document.objects.get(id = pk)
     
@@ -176,7 +213,7 @@ def document_edit(request , pk ):
             account = models.account.objects.get(id=code[i] , name=name[i])
             models.journal2.objects.create(document = document , account = account ,description = description[i] ,debtor=debtor[i].replace(",",""),creditor=creditor[i].replace(",",""))
         
-        return redirect("panel_document" )
+        return redirect("admin_panel_accounting:panel_document" )
 
     document =models.document.objects.get(id=pk)
     journals =  document.journals.all()
@@ -189,6 +226,15 @@ def document_edit(request , pk ):
     }
     return render(request , "admin_panel_accounting/document_edit.html" , data)
 
+@login_required
+@decorators.level_three
+def document_remove(request , pk ):
+    document = get_object_or_404(models.document, id = pk)
+    document.delete()
+    return redirect("admin_panel_accounting:panel_document" )
+
+@login_required
+@decorators.level_one
 def export_document_xls(request):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename="document.xls"'
@@ -213,6 +259,8 @@ def export_document_xls(request):
     wb.save(response)
     return response
 
+@login_required
+@decorators.level_one
 def check_accounts(request ):
     if request.method == "POST":
         id = request.POST['id']
@@ -233,7 +281,10 @@ def check_accounts(request ):
         accounts = models.account.objects.all().order_by("id")
         sum_debtors =models.journal2.objects.aggregate(Sum('debtor'))['debtor__sum']
         sum_creditors = models.journal2.objects.aggregate(Sum('creditor'))['creditor__sum']
-        result = sum_debtors - sum_creditors
+        if not sum_debtors == None :
+            result = sum_debtors - sum_creditors
+        else:
+            result = 0
 
     journals_list = []
     for account in accounts :
@@ -259,6 +310,8 @@ def check_accounts(request ):
     }
     return render(request, 'admin_panel_accounting/check_accounts.html',context=data)
 
+@login_required
+@decorators.level_one
 def export_check_accounts_xls(request):
     
     response = HttpResponse(content_type='application/ms-excel')
@@ -332,18 +385,61 @@ def export_check_accounts_xls(request):
     wb.save(response)
     return response
 
+@login_required
+@decorators.level_one
 def report_one(request ):
-    document = models.document.objects.all().order_by("id")
+    journals = []
+    id = 0
     if request.method == "POST":
-        list = []
         id = request.POST['id']
-        if id != "":
-            for i in document :
-                if i.journals.filter(account_id=id).exists():
-                    list.append(i)
-            document = list
+        journals = models.journal2.objects.filter(account__id = id ).order_by("document__date")
 
     data = {
-        "documents":document
+        "journals":journals,
+        "id" : id ,
     }
     return render(request, 'admin_panel_accounting/report_one.html',context=data)
+
+@login_required
+@decorators.level_one
+def export_check_report_xls(request , pk):
+    
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="report.xls"'
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet(str(pk))
+    # Sheet header, first row
+    row_num = 0
+    col_num = 0
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+    columns = ['تاریخ سند' , 'شماره سند' ,'شرح','بدهکار','بستانکار','مانده در خط' ]
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+    # Sheet body, remaining rows
+    font_style = xlwt.XFStyle()
+    rows = models.journal2.objects.filter(account__id = pk ).order_by("document__date")
+    result = 0
+    for row in rows:
+        row_num += 1
+        col_num = 0
+        ws.write(row_num, col_num, str(row.document.date), font_style)
+        col_num += 1
+        ws.write(row_num, col_num, row.document.pk, font_style)
+        col_num += 1
+        ws.write(row_num, col_num, row.description, font_style)
+        col_num += 1
+        ws.write(row_num, col_num, row.debtor, font_style)
+        col_num += 1
+        ws.write(row_num, col_num, row.creditor, font_style)
+        col_num += 1
+        result += row.debtor - row.creditor
+        if result < 0 :
+            style = xlwt.easyxf('pattern: pattern solid, fore_color red;')
+            ws.write(row_num, col_num, "("+str(result * -1)+")", style)
+        else :
+            ws.write(row_num, col_num, result, font_style)
+    # rtl :
+    ws.cols_right_to_left = True
+    wb.save(response)
+    return response

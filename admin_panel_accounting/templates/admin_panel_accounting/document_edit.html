@@ -134,15 +134,15 @@
             var td = tr[i].children[4];
             var re =Number(debtor.value.replaceAll(",","")) + Number(td.children[0].value.replaceAll(",",""))
             debtor.value = re.toLocaleString();
-            td.children[0].value = re.toLocaleString();
+            td.children[0].value = Number(td.children[0].value.replaceAll(",","")).toLocaleString();
         }
         for (var i = 0; i < tr.length; i++) {
             var td = tr[i].children[5];
             var re =Number(creditor.value.replaceAll(",","")) + Number(td.children[0].value.replaceAll(",",""))
             creditor.value = re.toLocaleString();
-            td.children[0].value = re.toLocaleString();
+            td.children[0].value = Number(td.children[0].value.replaceAll(",","")).toLocaleString();
         }
-        if(creditor.value==debtor.value && debtor.value!=0  && creditor.value!=0){
+        if(creditor.value==debtor.value && debtor.value!="0"  && creditor.value!="0"){
             var submit = document.getElementById("submit");
             submit.style.display = "inline-block";
         }

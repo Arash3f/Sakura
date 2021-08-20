@@ -42,7 +42,7 @@
             {% endif %}
         
             <div class="row">
-                {{ form.username }}
+                {{ form.user }}
                 <label for="username">نام کاربری</label>
             </div>
             <div class="row">
@@ -62,12 +62,12 @@
                 <label for="is_active">active</label>
             </div>
             <div class="row">
-                {{ form.is_staff }}
+                {{ form.user.is_staff }}
                 <label for="is_staff">staff</label>
             </div>
             <div class="row">
-                {{ form.is_superuser }}
-                <label for="is_superuser">superuser</label>
+                <label for="is_superuser">Accessibility</label>
+                {{ form.accessibility }}
             </div>
             <button type="submit">ثبت</button>
         </form>

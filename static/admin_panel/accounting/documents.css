@@ -39,7 +39,7 @@
 /* table */
 .base-table-style {
     border-collapse: collapse;
-    min-width: 80%;
+    width: 80%;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
     margin: 50px auto;
     direction: rtl;
@@ -100,4 +100,16 @@
     animation-duration: 1s;
     background-color: rgb(31, 203, 31);
     cursor: pointer;
+}
+
+.description{
+    width: 40%;
+}
+.base-table-style td input{
+    width: 90%;
+    border: none;
+    text-align: center;
+}
+.base-table-style td input:focus{
+    outline: none;
 }

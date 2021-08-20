@@ -2,32 +2,33 @@ import xlwt
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
 from django.contrib.auth.models import User
+from accounts.models import users
 from admin_panel_accounts import forms
 import datetime
 
 def panel_accounts(request):
-    user = User.objects.all()
+    user = users.objects.all()
     data = {
         "users":user
     }
     return render(request, 'admin_panel_accounts/accounts.html',context=data)
     
 def user_detail(request , pk ):
-    user = User.objects.get(pk = pk)
+    user = users.objects.get(user__pk = pk)
     data = {
-        "users":user
+        "user":user
     }
     return render(request , "admin_panel_accounts/detail.html" , data)
 
 def user_edit(request , pk ):
-    user = User.objects.get(pk = pk)
+    user = users.objects.get(pk = pk)
     
     if request.method == "POST":
-        form = forms.user_edit_form(request.POST, instance=user)
+        form = forms.users_edit_form(request.POST, instance=user)
         if form.is_valid():
             form.save()
     else:
-        form = forms.user_edit_form(instance=user)
+        form = forms.users_edit_form(instance=user)
     context={"form":form}
     return render(request , "admin_panel_accounts/edit.html" , context)
 

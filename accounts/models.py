@@ -7,9 +7,14 @@ User._meta.get_field('email')._unique = True
 
 # Create your models here.
 class users(models.Model):
+    MY_CHOICES = [("0",'عادی'),
+                    ("1",'سطح یک'),
+                    ("2","سطح دو"),
+                    ("3",'سطح سه')]
+
     # Validator for customize phone field
     phone_regex = RegexValidator(regex=r'((\+|00)98|0)9\d{9}', message="Phone number must be entered in the format: '09176666666'. Up to 11 digits allowed.")
-
+    accessibility = models.CharField(choices=MY_CHOICES , max_length = 100 , default = "0")
     user     = models.OneToOneField(User , related_name='user',  on_delete=models.CASCADE)
     phone    = models.CharField(validators=[phone_regex], max_length=11, blank=True)
     money    = models.IntegerField("money" , default=0 )

@@ -101,25 +101,16 @@ def Cancel_Order_Row(request):
     except:
         raise CustomValidation('Incomplete information','error', status_code=status.HTTP_400_BAD_REQUEST)
 
-
-
-
-
-# test :
-# {
-# "product":"6",
-# "pack":"2"
-# }
-# class Show_all_Order(generics.GenericAPIView  , mixins.ListModelMixin):
-#     serializer_class = Order_serializer
-#     queryset = Order.objects.all()
-#     permission_classes = [IsAuthenticated,]
+class Show_all_Order(generics.GenericAPIView  , mixins.ListModelMixin):
+    serializer_class = Order_serializer
+    queryset = Order.objects.all()
+    permission_classes = [IsAuthenticated,]
     
-#     def get_queryset(self):
-#         user = self.request.user
-#         user = users.objects.get(user=user)
-#         order = Order.objects.filter(user_id = user.id )
-#         return order
+    def get_queryset(self):
+        user = self.request.user
+        user = users.objects.get(user=user)
+        order = Order.objects.filter(user= user )
+        return order
     
-#     def get(self, request, *args, **kwargs):
-#         return self.list(request, *args, **kwargs)
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)

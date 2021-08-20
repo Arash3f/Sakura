@@ -13,14 +13,15 @@ input[type=number] {
     src: url(../../B_Yekan/Yekan.ttf);
   }
 input, textarea, select { font-family:BYekan; }
+
 body {
     background-color: #ffffff;
     display: grid;
     min-height: 100vh;
     min-width: 100vh;
-    grid-template-columns: 90% 10%;
-    grid-template-rows: 50px auto;
-    grid-template-areas: "nv nv" "in sb" "in sb" "in sb" "in sb";
+    grid-template-columns: 98% 2%;
+    grid-template-rows: 25px auto;
+    grid-template-areas: "nv sb" "in sb" "in sb" "in sb" "in sb";
     margin: 0;
     font-family: BYekan;
 }
@@ -30,36 +31,56 @@ body {
     grid-area: nv;
     display: flex;
     flex-direction: row;
-    background-color: #ffffffce;
+    background-color: #f9f1e8;
     border-bottom: 1px solid rgb(0, 0, 0);
 }
 
-.header h1 {
-    margin: auto 50px;
-    padding: 5px;
-    font-size: 1.5rem;
-    color: rgb(160, 60, 60);
-    border: 1px solid rgb(6, 136, 14);
+.header h5 {
+    justify-items: center;
+    margin: auto 5px ;
+    color: #060e17;
+}
+.header hr {
+    margin: 5px;
 }
 
-.header button {
+.header a {
     width: 100px;
-    margin: auto 50px;
-    height: 40px;
+    margin: auto 25px;
     background-color: red;
+    color: #ffffff;
     border-radius: 10px;
     margin-left: auto;
-}
-
-.header button a {
+    height: 24px;
+    text-align: center;
     text-decoration-line: none;
-    color: rgb(255, 255, 255);
 }
 
 /* slidbar */
-.slidebar {
+#slidebar{
+    display: none;
+    
+}
+#slidebar-btn{
+    display: inline-block;
+    height: 25px;
+    width: 100%;
+    border: 1px solid rgb(0, 0, 0);
+    background-color: #f1f1f1;
+}
+.slidepart{
     grid-area: sb;
-    background-color: #eea40544;
+    width: 100%;
+}
+.slide_part_2{
+    position: fixed;
+    width: 15%;
+}
+.slide{
+    position: fixed;
+}
+.slidebar {
+    background-color: #f1f1f1;
 }
 .slidebar .groups summary{
     height: 50px;
@@ -69,17 +90,15 @@ body {
     align-items: center;
     font-size: 1rem;
     border-bottom: 1px solid rgb(0, 0, 0);
-
-}
-.slidebar .groups .sub-groups{
-    height: 50px;
-    display: inline;
-    color: rebeccapurple;
-    border-bottom: 1px solid rgb(0, 0, 0);
+    border-left: 1px solid rgb(0, 0, 0);
 
 }
 .slidebar .groups .sub-groups a{
+    height: 25px;
+    color: #2f2f2f;
+    background-color: #c1c1c1;
     border-bottom: 1px solid rgb(0, 0, 0);
+    border-left: 1px solid rgb(0, 0, 0);
 }
 .slidebar .groups a{
     height: 50px;
@@ -101,4 +120,8 @@ body {
     flex-direction: column;
     align-items: center;
     background-color: #ffffffb7;
+}
+
+.change a{
+    text-decoration-line: none;
 }

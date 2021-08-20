@@ -14,97 +14,104 @@
 
     <!-- header -->
     <div class="header">
-        <h1>{{request.user}}</h1>
-        <button><a href="/admin_panel/logout">logout</a></button>
+        <h5>Account name : {{request.user}}</h5>
+        <hr>
+        <!-- <button><a href="/admin_panel/logout">خروج</a></button> -->
+        <a href="/admin_panel/logout">خروج</a>
     </div>
 
     <!-- slidebar -->
-    <div class="slidebar">
-        <details class="groups">
-            <summary>بخش کاربران</summary>
-            <div class="sub-groups">
-                <a href="/admin_panel/accounts">
-                    <h5>
-                        مشاهده کاربران
-                    </h5>
-                </a> 
-            </div>  
-        </details>
-        <details class="groups">
-            <summary>بخش حسابداری</summary>
-            <div class="sub-groups">
-                <a href="/admin_panel/accounting/account">
-                    <h5>
-                        حساب ها
-                    </h5>
-                </a> 
-                <a href="/admin_panel/accounting/document">
-                    <h5>
-                        دفتر روزنامه
-                    </h5>
-                </a>
-                <a href="/admin_panel/accounting/check_accounts">
-                    <h5>
-                        مرور حساب
-                    </h5>
-                </a>
-                <a href="/admin_panel/accounting/report_one">
-                    <h5>
-                        گزارش ۱
-                    </h5>
-                </a>
-            </div> 
-        </details>
-        <details class="groups">
-            <summary>انبارداری مواد اولیه</summary>
-            <div class="sub-groups">
-                <a href="/admin_panel/materials/">
-                    <h5>
-                        کالا ها
-                    </h5>
-                </a> 
-                <a href="/admin_panel/materials/document">
-                    <h5>
-                        دفتر روزنامه
-                    </h5>
-                </a>
-                <a href="/admin_panel/materials/check_materials">
-                    <h5>
-                        مرور کالاها
-                    </h5>
-                </a>
-                <a href="/admin_panel/materials/report_one">
-                    <h5>
-                        گزارش ۱
-                    </h5>
-                </a>
-            </div> 
-        </details>
-        <details class="groups">
-            <summary>انبارداری محصول</summary>
-            <div class="sub-groups">
-                <a href="/admin_panel/product_karaj/">
-                    <h5>
-                        محصول ها
-                    </h5>
-                </a> 
-                <a href="/admin_panel/product_karaj/document">
-                    <h5>
-                        دفتر روزنامه
-                    </h5>
-                </a>
-                <a href="/admin_panel/product_karaj/check_product">
-                    <h5>
-                        مرور کالاها
-                    </h5>
-                </a>
-                <a href="/admin_panel/product_karaj/report_one">
-                    <h5>
-                        گزارش ۱
-                    </h5>
-                </a>
-            </div> 
-        </details>
+    <div class="slidepart" >
+        <div class="slide" id="slide">
+            <button id="slidebar-btn">|||</button>
+            <div class="slidebar"id="slidebar">
+                <details class="groups">
+                    <summary>بخش کاربران</summary>
+                    <div class="sub-groups">
+                        <a href="/admin_panel/accounts">
+                            <h5>
+                                مشاهده کاربران
+                            </h5>
+                        </a> 
+                    </div>  
+                </details>
+                <details class="groups">
+                    <summary>بخش حسابداری</summary>
+                    <div class="sub-groups">
+                        <a href="/admin_panel/accounting/account">
+                            <h5>
+                                حساب ها
+                            </h5>
+                        </a> 
+                        <a href="/admin_panel/accounting/document">
+                            <h5>
+                                دفتر روزنامه
+                            </h5>
+                        </a>
+                        <a href="/admin_panel/accounting/check_accounts">
+                            <h5>
+                                مرور حساب
+                            </h5>
+                        </a>
+                        <a href="/admin_panel/accounting/report_one">
+                            <h5>
+                                گزارش ۱
+                            </h5>
+                        </a>
+                    </div> 
+                </details>
+                <details class="groups">
+                    <summary>انبارداری مواد اولیه</summary>
+                    <div class="sub-groups">
+                        <a href="/admin_panel/materials/">
+                            <h5>
+                                کالا ها
+                            </h5>
+                        </a> 
+                        <a href="/admin_panel/materials/document">
+                            <h5>
+                                دفتر روزنامه
+                            </h5>
+                        </a>
+                        <a href="/admin_panel/materials/check_materials">
+                            <h5>
+                                مرور کالاها
+                            </h5>
+                        </a>
+                        <a href="/admin_panel/materials/report_one">
+                            <h5>
+                                گزارش ۱
+                            </h5>
+                        </a>
+                    </div> 
+                </details>
+                <details class="groups">
+                    <summary>انبارداری محصول</summary>
+                    <div class="sub-groups">
+                        <a href="/admin_panel/product_karaj/">
+                            <h5>
+                                محصول ها
+                            </h5>
+                        </a> 
+                        <a href="/admin_panel/product_karaj/document">
+                            <h5>
+                                دفتر روزنامه
+                            </h5>
+                        </a>
+                        <a href="/admin_panel/product_karaj/check_product">
+                            <h5>
+                                مرور کالاها
+                            </h5>
+                        </a>
+                        <a href="/admin_panel/product_karaj/report_one">
+                            <h5>
+                                گزارش ۱
+                            </h5>
+                        </a>
+                    </div> 
+                </details>
+            </div>
+        </div>
     </div>
     
     <!-- body -->
@@ -116,6 +123,24 @@
 
     {% block script %}
     {% endblock %}
-    
+    <script>
+        document.querySelector("#slidebar-btn").onclick = function(e){
+            var slidebar = document.getElementById('slidebar');
+            if(slidebar.style.display == "block"){
+                var body  = document.getElementsByTagName("body")[0];
+                body.style.gridTemplateColumns = "98% 2%";
+                slidebar.style.display = "none"
+                document.getElementById("slide").className = 'slide';
+
+
+            }
+            else{
+                slidebar.style.display = "block";
+                var body  = document.getElementsByTagName("body")[0];
+                body.style.gridTemplateColumns = "85% 15%";
+                document.getElementById("slide").className = 'slide_part_2';
+            }
+        }
+    </script>
 </body>
 </html>

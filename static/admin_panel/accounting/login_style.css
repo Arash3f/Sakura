@@ -61,7 +61,7 @@ body {
 .login form button {
     width: 50%;
     height: 50%;
-    margin: auto;
+    margin: 0 auto;
 }
 
 @media screen and (max-width: 1300px) {

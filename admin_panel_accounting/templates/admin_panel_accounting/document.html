@@ -49,12 +49,14 @@
                 <input type="text" value="{{document.description}}"></td>
             <td>
                 <a href="edit/{{document.pk}}/">تغییرات</a>
+                <a style="color: red;" href="remove/{{document.pk}}/">حذف</a>
             </td>
         </tr>
         {% endfor%}
 
     </tbody>
 </table>
+{% include "admin_panel/__pagination.html" with iteams=documents%}	
 {% endblock %}
 
 {% block script %}
