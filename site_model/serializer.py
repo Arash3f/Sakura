@@ -3,6 +3,7 @@ from site_model.models import (Private_Site_Information ,
                                 Contact_Us,
                                 FAQ_model,
                                 Site_Information_Gallery,
+                                BUGS,
                                 )
 from rest_framework import serializers
 
@@ -39,6 +40,12 @@ class contact_us_serializer(serializers.ModelSerializer):
         send_email(email , "contact.html" , data , "پشتیبانی" )
         super().create(validated_data)
         return validated_data
+
+class bugs_serializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = BUGS
+        fields = '__all__'
 
 class FAQ_serializer(serializers.ModelSerializer):
 

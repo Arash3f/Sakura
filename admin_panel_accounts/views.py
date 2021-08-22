@@ -12,7 +12,7 @@ def panel_accounts(request):
         "users":user
     }
     return render(request, 'admin_panel_accounts/accounts.html',context=data)
-    
+
 def user_detail(request , pk ):
     user = users.objects.get(user__pk = pk)
     data = {
@@ -31,12 +31,6 @@ def user_edit(request , pk ):
         form = forms.users_edit_form(instance=user)
     context={"form":form}
     return render(request , "admin_panel_accounts/edit.html" , context)
-
-def user_remove(request , pk ):
-    user = User.objects.get(pk = pk)
-    user.delete()
-    return redirect("panel_accounts" )
-
 
 def export_users_xls(request):
     response = HttpResponse(content_type='application/ms-excel')

@@ -4,9 +4,9 @@ from admin_panel_accounting import forms
 from django.http import HttpResponse
 import xlwt
 from django.db.models import Q, Sum
-from django.contrib.auth.decorators import login_required
-from admin_panel import decorators
 from django.core.paginator import Paginator, PageNotAnInteger,EmptyPage
+from admin_panel import decorators
+from django.contrib.auth.decorators import login_required
 
 
 @login_required
@@ -152,7 +152,7 @@ def document_add(request ):
         sum_debtor = request.POST['sum_debtor'][0].replace(",","")
         sum_creditor = request.POST['sum_creditor'][0].replace(",","")
         if sum_debtor != sum_creditor or sum_debtor=="0" or sum_creditor=="0":
-            return redirect("document_add" )
+            return redirect("admin_panel_accounting:document_add" )
         document_id = request.POST['document_id']
         document_date= request.POST['document_date']
         document_description= request.POST['document_description']

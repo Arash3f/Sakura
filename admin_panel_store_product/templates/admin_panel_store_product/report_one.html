@@ -18,25 +18,26 @@
 
     </div>
 </form>
-<table class="base-table-style"> 
+<table class="base-table-style" id="table"> 
     <thead>
         <tr>
-            <th>سند</th>
-            <th>تاریخ</th>
-            <th>شرح</th>
-            <th>تغییرات</th>
+            <th>تاریخ سند</th>
+            <th>شماره سند</th>
+            <th class="description">شرح</th>
+            <th>وارده</th>
+            <th>صادره</th>
+            <th>مانده در خط</th>
         </tr>
     </thead>
     <tbody>
-        {% for document in documents %}
+        {% for journal in journals %}
         <tr>
-            <td>{{document.id}}</td>
-            <td>{{document.date}}</td>
-            <td>
-                <input type="text" value="{{document.description}}"></td>
-            <td>
-                <a href="../document/edit/{{document.pk}}/">تغییرات</a>
-            </td>
+            <td><input type="text" value="{{journal.document.date}}" readonly></td>
+            <td><input type="text" value="{{journal.document.id}}" readonly></td>
+            <td><input type="text" value="{{journal.description}}" readonly></td>
+            <td><input type="text" value="{{journal.debtor}}" readonly></td>
+            <td><input type="text" value="{{journal.creditor}}" readonly></td>
+            <td><input type="text" value="0" readonly></td>  
         </tr>
         {% endfor%}
 
@@ -45,4 +46,25 @@
 {% endblock %}
 
 {% block script %}
+<script>
+    window.onload = function exampleFunction() {
+        var table = document.getElementById("table");
+        var tr = table.children[1];
+        var tr = tr.children;
+        var result = 0 ;
+        for (var i = 0; i < tr.length; i++) {
+            var debtor =tr[i].children[3];
+            var creditor =tr[i].children[4];
+            var result_column =tr[i].children[5];
+            result = (result + Number(debtor.children[0].value)) - Number(creditor.children[0].value);
+            debtor.children[0].value = Number(debtor.children[0].value.replaceAll(",","")).toLocaleString();
+            creditor.children[0].value = Number(creditor.children[0].value.replaceAll(",","")).toLocaleString();
+            result_column.children[0].value = result.toLocaleString();
+            if(result < 0 ){
+                result_column.children[0].style.color = "red" ;
+                result_column.children[0].value = "("+(Math.abs(result)).toLocaleString()+")";
+            }
+        }
+    }
+</script>
 {% endblock %}

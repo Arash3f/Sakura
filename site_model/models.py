@@ -83,6 +83,18 @@ class FAQ_model(models.Model):
     def __str__(self):
         return self.title
 
+class BUGS(models.Model):
+    name = models.CharField(verbose_name="نام" ,max_length = 100 , blank=True , null = True )
+    last_name = models.CharField(verbose_name="فامیل" ,max_length = 100 , blank=True , null = True )
+    picture = models.ImageField(verbose_name="عکس" ,upload_to = 'bugs/', blank=True , null = True)
+    title = models.CharField(verbose_name="عنوان" , max_length = 100 , blank=True , null = True )
+    body = models.TextField(verbose_name="متن" , blank=True , null = True)
 
+    class Meta:
+        verbose_name = ("باگ ها")
+        verbose_name_plural = ("مشکل باگ")
+
+    def __str__(self):
+        return self.title
     
     

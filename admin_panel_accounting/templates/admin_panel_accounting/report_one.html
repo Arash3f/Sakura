@@ -65,6 +65,7 @@
             debtor.children[0].value = Number(debtor.children[0].value.replaceAll(",","")).toLocaleString();
             creditor.children[0].value = Number(creditor.children[0].value.replaceAll(",","")).toLocaleString();
             result_column.children[0].value = result.toLocaleString();
+            
             if(result < 0 ){
                 result_column.children[0].style.color = "red" ;
                 result_column.children[0].value = "("+(Math.abs(result)).toLocaleString()+")";

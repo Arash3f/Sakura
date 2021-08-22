@@ -65,6 +65,7 @@
         </tbody>
     </table>
     <div class="add">
+        <button  type="button" id="remove">-</button>
         <button  type="button" id="add">+</button>
     </div>
     <div class="body-end">
@@ -177,6 +178,11 @@
         </td>
         `;
         document.getElementById('documents').appendChild(div);
+        
+      }
+      document.querySelector("#remove").onclick = function(e){
+        var select = document.getElementById('documents');
+        select.removeChild(select.lastChild);
         
       }
 </script>

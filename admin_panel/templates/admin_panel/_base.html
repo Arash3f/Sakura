@@ -16,7 +16,6 @@
     <div class="header">
         <h5>Account name : {{request.user}}</h5>
         <hr>
-        <!-- <button><a href="/admin_panel/logout">خروج</a></button> -->
         <a href="/admin_panel/logout">خروج</a>
     </div>
 
@@ -88,6 +87,31 @@
                 <details class="groups">
                     <summary>انبارداری محصول</summary>
                     <div class="sub-groups">
+                        <a href="/admin_panel/product/">
+                            <h5>
+                                محصول ها
+                            </h5>
+                        </a> 
+                        <a href="/admin_panel/product/document">
+                            <h5>
+                                دفتر روزنامه
+                            </h5>
+                        </a>
+                        <a href="/admin_panel/product/check_product">
+                            <h5>
+                                مرور کالاها
+                            </h5>
+                        </a>
+                        <a href="/admin_panel/product/report_one">
+                            <h5>
+                                گزارش ۱
+                            </h5>
+                        </a>
+                    </div> 
+                </details>
+                <details class="groups">
+                    <summary>انبارداری کرج</summary>
+                    <div class="sub-groups">
                         <a href="/admin_panel/product_karaj/">
                             <h5>
                                 محصول ها
@@ -137,7 +161,7 @@
             else{
                 slidebar.style.display = "block";
                 var body  = document.getElementsByTagName("body")[0];
-                body.style.gridTemplateColumns = "85% 15%";
+                body.style.gridTemplateColumns = "auto 200px";
                 document.getElementById("slide").className = 'slide_part_2';
             }
         }

@@ -89,6 +89,7 @@ def modify_Order_row(request):
 def Cancel_Order_Row(request):
     user = request.user
     try:
+        user = users.objects.get(user = user)
         request_product_id = request.data["product"]
         pack = request.data["pack"]
         order = Order.objects.get(user_id = user.id , status=1)

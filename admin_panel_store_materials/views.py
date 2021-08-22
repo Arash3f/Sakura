@@ -1,23 +1,41 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from admin_panel_store_materials import models
 from admin_panel_store_materials import forms
 from django.http import HttpResponse
 import xlwt
 from django.db.models import Q, Sum
+from admin_panel import decorators
+from django.core.paginator import Paginator, PageNotAnInteger,EmptyPage
 
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+@login_required
+@decorators.level_one
 def panel_materials(request):
-    materials = models.materials.objects.all()
+    product = models.product.objects.all()
     if request.method == "POST":
         id = request.POST['id']
         if id != "":
-            materials = materials.filter(id=id)
+            product = product.filter(id=id).order_by("id")
+    
+    paginator = Paginator(product ,6 )
+    page = request.GET.get('page')
+
+    try:
+        product = paginator.page(page)
+    except PageNotAnInteger:
+        product = paginator.page(1)
+    except EmptyPage:
+        product = paginator.page(paginator.num_pages)
+
     data = {
-        "materials":materials
+        "product":product
     }
     return render(request, 'admin_panel_store_materials/materials.html',context=data)
 
+@login_required
+@decorators.level_three
 def materials_edit(request , pk ):
     materials = models.materials.objects.get(id = pk)
     
@@ -27,6 +45,7 @@ def materials_edit(request , pk ):
             journals = models.journal.objects.filter(materials = materials)
             if journals.count() == 0 :
                 form.save()
+                return redirect("admin_panel_materials:panel_product" )
             else:
                 form.add_error("name", " ابتدا تمامی اطلاعات این کالا را در دفتر روزنامه پاک کنید .")
     else:
@@ -34,24 +53,30 @@ def materials_edit(request , pk ):
     context={"form":form}
     return render(request , "admin_panel_store_materials/materials_edit.html" , context)
 
+@login_required
+@decorators.level_three
 def materials_remove(request , pk ):
     materials = models.materials.objects.get(id = pk)
     journals = models.journal.objects.filter(materials=materials)
     if not journals :
         materials.delete()
-    return redirect("panel_materials" )
+    return redirect("admin_panel_materials:panel_materials" )
 
+@login_required
+@decorators.level_two
 def materials_add(request ):
     form = forms. materials_add_form(request.POST or None)
     if request.method == "POST":
         if form.is_valid():
             form.save()
-            return redirect("panel_materials" )
+            return redirect("admin_panel_materials:panel_materials" )
         else:
             form.add_error("name", "قبلا کالایی با این کد ساخته شده است")
     context={"form":form}
     return render(request , "admin_panel_store_materials/materials_add.html" , context)
 
+@login_required
+@decorators.level_one
 def export_materials_xls(request):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename="materials.xls"'
@@ -78,8 +103,10 @@ def export_materials_xls(request):
 
 #  document :
 
+@login_required
+@decorators.level_one
 def panel_document(request):
-    document = models.document.objects.all()
+    document = models.document.objects.all().order_by("id")
     if request.method == "POST":
         id = request.POST['id']
         date = request.POST['date']
@@ -107,11 +134,23 @@ def panel_document(request):
                 else :
                     document = models.document.objects.filter(Q(description__icontains = description)|Q(id = id)|Q(date = date))
 
+    paginator = Paginator(document ,6 )
+    page = request.GET.get('page')
+
+    try:
+        document = paginator.page(page)
+    except PageNotAnInteger:
+        document = paginator.page(1)
+    except EmptyPage:
+        document = paginator.page(paginator.num_pages)
+
     data = {
         "documents":document
     }
     return render(request, 'admin_panel_store_materials/document.html',context=data)
 
+@login_required
+@decorators.level_two
 def document_add(request ):
     if request.method == "POST":
         document_id = request.POST['document_id']
@@ -129,7 +168,7 @@ def document_add(request ):
                 break
             materials = models.materials.objects.get(id=code[i] , name=name[i])
             models.journal.objects.create(document = document , materials = materials ,description = description[i] ,debtor=debtor[i].replace(",",""),creditor=creditor[i].replace(",",""))
-        return redirect("panel_document" )
+        return redirect("admin_panel_materials:panel_document" )
 
     if models.document.objects.all().count()!=0 :
         document_last_id = models.document.objects.latest('id').id +1
@@ -143,12 +182,12 @@ def document_add(request ):
     }
     return render(request , "admin_panel_store_materials/document_add.html" , context)
 
+@login_required
+@decorators.level_three
 def document_edit(request , pk ):
     document = models.document.objects.get(id = pk)
     
     if request.method == "POST":
-        sum_debtor = request.POST['sum_debtor'][0].replace(",","")
-        sum_creditor = request.POST['sum_creditor'][0].replace(",","")
         document_id = request.POST['document_id']
         document_date= request.POST['document_date']
         document_description= request.POST['document_description']
@@ -170,7 +209,7 @@ def document_edit(request , pk ):
             materials = models.materials.objects.get(id=code[i] , name=name[i])
             models.journal.objects.create(document = document , materials = materials ,description = description[i] ,debtor=debtor[i].replace(",",""),creditor=creditor[i].replace(",",""))
         
-        return redirect("panel_document" )
+        return redirect("admin_panel_materials:panel_document" )
 
     document =models.document.objects.get(id=pk)
     journals =  document.journals.all()
@@ -183,6 +222,15 @@ def document_edit(request , pk ):
     }
     return render(request , "admin_panel_store_materials/document_edit.html" , data)
 
+@login_required
+@decorators.level_three
+def document_remove(request , pk ):
+    document = get_object_or_404(models.document, id = pk)
+    document.delete()
+    return redirect("admin_panel_materials:panel_document" )
+
+@login_required
+@decorators.level_one
 def export_document_xls(request):
     response = HttpResponse(content_type='application/ms-excel')
     response['Content-Disposition'] = 'attachment; filename="document.xls"'
@@ -207,11 +255,13 @@ def export_document_xls(request):
     wb.save(response)
     return response
 
+@login_required
+@decorators.level_one
 def check_materials(request ):
     if request.method == "POST":
         id = request.POST['id']
         if id == "":
-            materials = models.materials.objects.all()
+            materials = models.materials.objects.all().order_by("id")
             sum_debtors =models.journal.objects.aggregate(Sum('debtor'))['debtor__sum']
             sum_creditors = models.journal.objects.aggregate(Sum('creditor'))['creditor__sum']
             result = sum_debtors - sum_creditors
@@ -256,6 +306,8 @@ def check_materials(request ):
     }
     return render(request, 'admin_panel_store_materials/check_materials.html',context=data)
 
+@login_required
+@decorators.level_one
 def export_check_materials_xls(request):
     
     response = HttpResponse(content_type='application/ms-excel')
@@ -329,18 +381,62 @@ def export_check_materials_xls(request):
     wb.save(response)
     return response
 
+@login_required
+@decorators.level_one
 def report_one(request ):
-    document = models.document.objects.all()
+    journals = []
+    id = 0
+
     if request.method == "POST":
-        list = []
         id = request.POST['id']
-        if id != "":
-            for i in document :
-                if i.journals.filter(materials_id=id).exists():
-                    list.append(i)
-            document = list
+        journals = models.journal.objects.filter(product__id = id ).order_by("document__date")
 
     data = {
-        "documents":document
+        "journals":journals,
+        "id" : id ,
     }
     return render(request, 'admin_panel_store_materials/report_one.html',context=data)
+
+@login_required
+@decorators.level_one
+def export_check_report_xls(request , pk):
+    
+    response = HttpResponse(content_type='application/ms-excel')
+    response['Content-Disposition'] = 'attachment; filename="report.xls"'
+    wb = xlwt.Workbook(encoding='utf-8')
+    ws = wb.add_sheet(str(pk))
+    # Sheet header, first row
+    row_num = 0
+    col_num = 0
+    font_style = xlwt.XFStyle()
+    font_style.font.bold = True
+    columns = ['تاریخ سند' , 'شماره سند' ,'شرح','وارده','صادره','مانده در خط' ]
+    for col_num in range(len(columns)):
+        ws.write(row_num, col_num, columns[col_num], font_style)
+    # Sheet body, remaining rows
+    font_style = xlwt.XFStyle()
+    rows = models.journal.objects.filter(account__id = pk ).order_by("document__date")
+    result = 0
+    for row in rows:
+        row_num += 1
+        col_num = 0
+        ws.write(row_num, col_num, str(row.document.date), font_style)
+        col_num += 1
+        ws.write(row_num, col_num, row.document.pk, font_style)
+        col_num += 1
+        ws.write(row_num, col_num, row.description, font_style)
+        col_num += 1
+        ws.write(row_num, col_num, row.debtor, font_style)
+        col_num += 1
+        ws.write(row_num, col_num, row.creditor, font_style)
+        col_num += 1
+        result += row.debtor - row.creditor
+        if result < 0 :
+            style = xlwt.easyxf('pattern: pattern solid, fore_color red;')
+            ws.write(row_num, col_num, "("+str(result * -1)+")", style)
+        else :
+            ws.write(row_num, col_num, result, font_style)
+    # rtl :
+    ws.cols_right_to_left = True
+    wb.save(response)
+    return response

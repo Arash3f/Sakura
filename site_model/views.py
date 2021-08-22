@@ -1,6 +1,7 @@
 from site_model.serializer import(site_model_serializer ,
                                     about_we_serializer ,
                                     contact_us_serializer,
+                                    bugs_serializer,
                                     FAQ_serializer,
                                     site_information_gallery_serializer,
                                     )
@@ -9,6 +10,7 @@ from site_model.models import (Private_Site_Information ,
                                 Contact_Us , 
                                 FAQ_model,
                                 Site_Information_Gallery,
+                                BUGS,
                                 )
 from rest_framework import (generics,
                             mixins,
@@ -51,6 +53,13 @@ class About_Us(generics.GenericAPIView , mixins.ListModelMixin , mixins.CreateMo
 class contact_us(generics.GenericAPIView , mixins.ListModelMixin , mixins.CreateModelMixin):
     serializer_class = contact_us_serializer
     queryset = Contact_Us.objects.all()
+
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+
+class bugs(generics.GenericAPIView , mixins.ListModelMixin , mixins.CreateModelMixin):
+    serializer_class = bugs_serializer
+    queryset = BUGS.objects.all()
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)

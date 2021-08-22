@@ -17,6 +17,11 @@ class Contact_Us(admin.ModelAdmin):
     list_display=[ 'get_title_display' , 'name' , 'email' , 'phone']
     list_filter = ('title' , )
 
+@admin.register(models.BUGS)
+class BUGS(admin.ModelAdmin):
+    field = "__all__"
+    list_display=[ 'title' , 'name' , 'last_name' ] 
+
 @admin.register(models.FAQ_model)
 class FAQ_model(admin.ModelAdmin):
     field = "__all__"
