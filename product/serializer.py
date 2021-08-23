@@ -45,10 +45,11 @@ class product_serializer(serializers.ModelSerializer):
 # ************************************************************************
 
 class product_group_serializer(serializers.ModelSerializer):
+    open = serializers.BooleanField(default=False)
 
     class Meta:
         model = product_group
-        fields = ('id','name' ,'group'  , 'picture' , 'slug')
+        fields = ('id','name' ,'group'  , 'picture' , 'slug' ,'open')
 
 class product_list_group_serializer(serializers.ModelSerializer):
     products = product_list_serializer(many=True)
