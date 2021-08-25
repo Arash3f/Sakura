@@ -33,14 +33,6 @@ INSTALLED_APPS = [
     'panel',
     'site_model',
     'support',
-    
-        # panel :
-        'admin_panel',
-        'admin_panel_accounts',
-        'admin_panel_accounting',
-        "admin_panel_store_materials",
-        "admin_panel_store_product",
-        "admin_panel_store_karaj",
 
     ####### Additional Apps ####### 
     'django_cleanup.apps.CleanupConfig', # clear (Automatically clear image file after delete) :
