@@ -13,7 +13,7 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv() , default='127.0.0.1')
 
 INSTALLED_APPS = [
     'django_jalali',
-    # 'whitenoise.runserver_nostatic',# whitenoise
+    'whitenoise.runserver_nostatic',# whitenoise
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -48,7 +48,7 @@ MIDDLEWARE = [
     'django.middleware.common.BrokenLinkEmailsMiddleware',
 
     'django.middleware.security.SecurityMiddleware',
-    # 'whitenoise.middleware.WhiteNoiseMiddleware', # whitenoise
+    'whitenoise.middleware.WhiteNoiseMiddleware', # whitenoise
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -59,7 +59,14 @@ MIDDLEWARE = [
 
 ####### Cors settings ####### (It will change later  !!)
 CORS_ORIGIN_ALLOW_ALL = True
+# SECURE_SSL_REDIRECT = True
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
+# SECURE_BROWSER_XSS_FILTER = True
 
+# SECURE_HSTS_SECONDS = 31536000
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_PRELOAD = True
 ROOT_URLCONF = 'Sakura.urls'
 
 TEMPLATES = [
@@ -85,8 +92,8 @@ WSGI_APPLICATION = 'Sakura.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': config('ENGINE',default="django.db.backends.sqlite3"),
-        'NAME': config('NAME',default=BASE_DIR / 'db-branch-admin-panel.sqlite3'),
-        'USER': config('USER',default=""),
+        'NAME': config('NAME',default=BASE_DIR / 'db.sqlite3'),
+        'USER': config('DB_USER',default=""),
         'PASSWORD':config('PASSWORD',default=""),
         'HOST': config('HOST',default=""),
         'PORT': config('PORT',default="")
@@ -185,6 +192,6 @@ STATICFILES_DIRS = [
 
 STATIC_ROOT = os.path.join(BASE_DIR , "staticfiles")
 MEDIA_ROOT   = os.path.join(BASE_DIR , "media")
-
+# MEDIA_ROOT   = os.path.join(BASE_DIR , "../public_html/media")
 # origin site url :
 SITE_URL=config('SITE_URL')
