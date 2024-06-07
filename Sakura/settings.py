@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv() , default='127.0.0.1')
 
@@ -191,7 +191,7 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR , "staticfiles")
-MEDIA_ROOT   = os.path.join(BASE_DIR , "media")
+MEDIA_ROOT   = os.path.join(BASE_DIR , "media/")
 # MEDIA_ROOT   = os.path.join(BASE_DIR , "../public_html/media")
 # origin site url :
 SITE_URL=config('SITE_URL')

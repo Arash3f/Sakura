@@ -1,0 +1,28 @@
+{
+  "participants": [
+    {
+      "name": "\u00da\u00a9\u00d8\u00a7\u00d8\u00b1\u00d8\u00a8\u00d8\u00b1 Instagram"
+    },
+    {
+      "name": "barsaavaa"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "\u00da\u00a9\u00d8\u00a7\u00d8\u00b1\u00d8\u00a8\u00d8\u00b1 Instagram",
+      "timestamp_ms": 1693264405821,
+      "content": "\u00e2\u0080\u008f\u00da\u00a9\u00d8\u00a7\u00d8\u00b1\u00d8\u00a8\u00d8\u00b1 Instagram\u00e2\u0080\u008f \u00d8\u00af\u00d8\u00a7\u00d8\u00b3\u00d8\u00aa\u00d8\u00a7\u00d9\u0086\u00db\u008c \u00d8\u00a8\u00d9\u0087\u00e2\u0080\u008c\u00d8\u00a7\u00d8\u00b4\u00d8\u00aa\u00d8\u00b1\u00d8\u00a7\u00da\u00a9 \u00da\u00af\u00d8\u00b0\u00d8\u00a7\u00d8\u00b4\u00d8\u00aa.",
+      "share": {
+        "original_content_owner": "amirrabiee"
+      },
+      "is_geoblocked_for_viewer": false
+    }
+  ],
+  "title": "\u00e2\u0080\u008e\u00da\u00a9\u00d8\u00a7\u00d8\u00b1\u00d8\u00a8\u00d8\u00b1 Instagram\u00e2\u0080\u008e",
+  "is_still_participant": true,
+  "thread_path": "message_requests/karbrinstagram_17885447828913565",
+  "magic_words": [
+    
+  ],
+  "is_pending": true
+}

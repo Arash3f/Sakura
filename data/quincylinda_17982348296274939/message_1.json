@@ -1,0 +1,31 @@
+{
+  "participants": [
+    {
+      "name": "Quincy linda"
+    },
+    {
+      "name": "barsaavaa"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "Quincy linda",
+      "timestamp_ms": 1686671687578,
+      "content": "\u00da\u0086\u00d8\u00b7\u00d9\u0088\u00d8\u00b1 \u00d9\u0087\u00d8\u00b3\u00d8\u00aa\u00db\u008c\u00d8\u00af\u00d8\u009f",
+      "is_geoblocked_for_viewer": false
+    },
+    {
+      "sender_name": "Quincy linda",
+      "timestamp_ms": 1686671678723,
+      "content": "Hi friend",
+      "is_geoblocked_for_viewer": false
+    }
+  ],
+  "title": "Quincy linda",
+  "is_still_participant": true,
+  "thread_path": "message_requests/quincylinda_17982348296274939",
+  "magic_words": [
+    
+  ],
+  "is_pending": true
+}

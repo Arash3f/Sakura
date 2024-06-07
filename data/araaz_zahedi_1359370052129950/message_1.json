@@ -1,0 +1,28 @@
+{
+  "participants": [
+    {
+      "name": "araaz_zahedi"
+    },
+    {
+      "name": "barsaavaa"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "araaz_zahedi",
+      "timestamp_ms": 1709923095829,
+      "content": "\u00d9\u0085\u00d8\u00b4\u00da\u00a9\u00d9\u0084 \u00da\u00a9\u00d8\u00a7\u00d8\u00b1 \u00da\u00a9\u00d8\u00ac\u00d8\u00a7 \u00d8\u00a8\u00d9\u0088\u00d8\u00af",
+      "share": {
+        "link": "https://instagram.com/stories/barsaavaa/3319386292866865464"
+      },
+      "is_geoblocked_for_viewer": false
+    }
+  ],
+  "title": "araaz_zahedi",
+  "is_still_participant": true,
+  "thread_path": "message_requests/araaz_zahedi_1359370052129950",
+  "magic_words": [
+    
+  ],
+  "is_pending": true
+}

@@ -1,0 +1,31 @@
+{
+  "participants": [
+    {
+      "name": "m_p31365"
+    },
+    {
+      "name": "barsaavaa"
+    }
+  ],
+  "messages": [
+    {
+      "sender_name": "m_p31365",
+      "timestamp_ms": 1685119283286,
+      "content": "\u00d8\u00a7\u00d9\u0085\u00d8\u00a7 \u00d8\u00aa\u00da\u00af \u00d9\u0086\u00da\u00a9\u00d9\u0086 \u00d9\u0086\u00d9\u0081\u00d9\u0088\u00d8\u00b0\u00db\u008c\u00d8\u00a7 \u00d9\u0085\u00db\u008c\u00d8\u00b2\u00d9\u0086\u00d9\u0086",
+      "is_geoblocked_for_viewer": false
+    },
+    {
+      "sender_name": "m_p31365",
+      "timestamp_ms": 1685119265966,
+      "content": "\u00d8\u00b3\u00d9\u0084\u00d8\u00a7\u00d9\u0085 \u00d8\u00ad\u00d8\u00a7\u00d8\u00ac\u00db\u008c \u00d8\u00af\u00d9\u0086\u00d8\u00a8\u00d8\u00a7\u00d9\u0084 \u00da\u00a9\u00d9\u0086 \u00d9\u00be\u00d8\u00b1\u00d8\u00af\u00db\u008c\u00d8\u00b3\u00d9\u0085",
+      "is_geoblocked_for_viewer": false
+    }
+  ],
+  "title": "m_p31365",
+  "is_still_participant": true,
+  "thread_path": "message_requests/m_p31365_17845378103992798",
+  "magic_words": [
+    
+  ],
+  "is_pending": true
+}
